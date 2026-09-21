@@ -1,1 +1,39 @@
-Nothing needs to be added to .gitignore since the changes only include source/config files (.txt files) and no build artifacts, dependencies, or temp files.
+```
+# Dependencies
+materia-medica-builder/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+.env
+.env.local
+.env.*
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+```
