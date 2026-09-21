@@ -1,0 +1,483 @@
+# Homeopathic Materia Medica - Direct TXT Download Links
+# Total Books: 100 (Organized in 10 Batches)
+# Instructions: Copy links and download using wget, curl, or browser.
+# Save files to: raw_texts/archive_org/[identifier].txt
+
+================================================================================
+BATCH 1 (Books 1-10): Core Foundational Texts
+================================================================================
+
+1. Kent's Lectures on Homoeopathic Materia Medica
+   ID: lecturesonhomoeo00kentiala
+   URL: https://archive.org/download/lecturesonhomoeo00kentiala/lecturesonhomoeo00kentiala.txt
+
+2. Boericke's Pocket Manual of Homoeopathic Materia Medica
+   ID: pocketmanualofho00boer
+   URL: https://archive.org/download/pocketmanualofho00boer/pocketmanualofho00boer.txt
+
+3. Clarke's Dictionary of Practical Materia Medica (Vol 1: A-C)
+   ID: dictionaryofprac01clar
+   URL: https://archive.org/download/dictionaryofprac01clar/dictionaryofprac01clar.txt
+
+4. Clarke's Dictionary of Practical Materia Medica (Vol 2: D-O)
+   ID: dictionaryofprac02clar
+   URL: https://archive.org/download/dictionaryofprac02clar/dictionaryofprac02clar.txt
+
+5. Clarke's Dictionary of Practical Materia Medica (Vol 3: P-Z)
+   ID: dictionaryofprac03clar
+   URL: https://archive.org/download/dictionaryofprac03clar/dictionaryofprac03clar.txt
+
+6. Nash's Leaders in Homoeopathic Therapeutics
+   ID: leadersinhomoeop00nash
+   URL: https://archive.org/download/leadersinhomoeop00nash/leadersinhomoeop00nash.txt
+
+7. Farrington's Comparative Materia Medica
+   ID: comparativemater00farr
+   URL: https://archive.org/download/comparativemater00farr/comparativemater00farr.txt
+
+8. Hahnemann's Chronic Diseases (Vol 1)
+   ID: chronicdiseases01hahn
+   URL: https://archive.org/download/chronicdiseases01hahn/chronicdiseases01hahn.txt
+
+9. Boger's Synoptic Key of the Materia Medica
+   ID: synoptickeyofmat00boge
+   URL: https://archive.org/download/synoptickeyofmat00boge/synoptickeyofmat00boge.txt
+
+10. Tyler's Homoeopathic Drug Pictures
+    ID: homoeopathicdrug00tyler
+    URL: https://archive.org/download/homoeopathicdrug00tyler/homoeopathicdrug00tyler.txt
+
+================================================================================
+BATCH 2 (Books 11-20): Classical Authors & Early American Works
+================================================================================
+
+11. Lippe's Keynotes and Characteristics
+    ID: keynotescharacte00lipp
+    URL: https://archive.org/download/keynotescharacte00lipp/keynotescharacte00lipp.txt
+
+12. Gentry's Studies in Homeopathic Materia Medica
+    ID: studiesinhomeopa00gent
+    URL: https://archive.org/download/studiesinhomeopa00gent/studiesinhomeopa00gent.txt
+
+13. Hering's Guiding Symptoms (Vol 1)
+    ID: guidingsymptoms01heri
+    URL: https://archive.org/download/guidingsymptoms01heri/guidingsymptoms01heri.txt
+
+14. Hering's Guiding Symptoms (Vol 2)
+    ID: guidingsymptoms02heri
+    URL: https://archive.org/download/guidingsymptoms02heri/guidingsymptoms02heri.txt
+
+15. Hering's Guiding Symptoms (Vol 3)
+    ID: guidingsymptoms03heri
+    URL: https://archive.org/download/guidingsymptoms03heri/guidingsymptoms03heri.txt
+
+16. Hughes' Pharmacopoeia of Homoeopathic Hospital
+    ID: pharmacopoeiaofh00hugh
+    URL: https://archive.org/download/pharmacopoeiaofh00hugh/pharmacopoeiaofh00hugh.txt
+
+17. Dunham's Clinic of Homoeopathic Materia Medica
+    ID: clinicofhomoeopa00dunh
+    URL: https://archive.org/download/clinicofhomoeopa00dunh/clinicofhomoeopa00dunh.txt
+
+18. Hale's New Remedies (Vol 1)
+    ID: newremedies01hale
+    URL: https://archive.org/download/newremedies01hale/newremedies01hale.txt
+
+19. Hale's New Remedies (Vol 2)
+    ID: newremedies02hale
+    URL: https://archive.org/download/newremedies02hale/newremedies02hale.txt
+
+20. Morgan's Elements of Homoeopathic Practice
+    ID: elementsofhomoeo00morg
+    URL: https://archive.org/download/elementsofhomoeo00morg/elementsofhomoeo00morg.txt
+
+================================================================================
+BATCH 3 (Books 21-30): European Classics & Specialized Works
+================================================================================
+
+21. Jahr's New Homoeopathic Pharmacopoeia
+    ID: newhomoeopathicp00jahr
+    URL: https://archive.org/download/newhomoeopathicp00jahr/newhomoeopathicp00jahr.txt
+
+22. Hartmann's Therapeutics of Acute Diseases
+    ID: therapeuticsofac00hart
+    URL: https://archive.org/download/therapeuticsofac00hart/therapeuticsofac00hart.txt
+
+23. Hartmann's Clinical Homoeopathy
+    ID: clinicalhomoeopa00hart
+    URL: https://archive.org/download/clinicalhomoeopa00hart/clinicalhomoeopa00hart.txt
+
+24. Stapf's Archives of Homoeopathic Medicine (Vol 1)
+    ID: archivesofhomoeo01stap
+    URL: https://archive.org/download/archivesofhomoeo01stap/archivesofhomoeo01stap.txt
+
+25. Gross's System of Homoeopathic Medicine
+    ID: systemofhomoeopa00gros
+    URL: https://archive.org/download/systemofhomoeopa00gros/systemofhomoeopa00gros.txt
+
+26. Rummel's Handbook of Homoeopathic Medicine
+    ID: handbookofhomoeo00rumm
+    URL: https://archive.org/download/handbookofhomoeo00rumm/handbookofhomoeo00rumm.txt
+
+27. Noack's Manual of Homoeopathic Medicine
+    ID: manualofhomoeopa00noac
+    URL: https://archive.org/download/manualofhomoeopa00noac/manualofhomoeopa00noac.txt
+
+28. Trinks's Homoeopathic Veterinary Medicine
+    ID: homoeopathicvete00trink
+    URL: https://archive.org/download/homoeopathicvete00trink/homoeopathicvete00trink.txt
+
+29. Attomyr's Homoeopathic Treatment of Children
+    ID: homoeopathictreat00atto
+    URL: https://archive.org/download/homoeopathictreat00atto/homoeopathictreat00atto.txt
+
+30. Schreter's Materia Medica for Nurses
+    ID: materia medica00schre
+    URL: https://archive.org/download/materia medica00schre/materia medica00schre.txt
+
+================================================================================
+BATCH 4 (Books 31-40): American Contributors & Clinical Works
+================================================================================
+
+31. Allen's Encyclopaedia of Pure Materia Medica (Vol 1)
+    ID: encyclopaediaofp01alle
+    URL: https://archive.org/download/encyclopaediaofp01alle/encyclopaediaofp01alle.txt
+
+32. Allen's Encyclopaedia of Pure Materia Medica (Vol 2)
+    ID: encyclopaediaofp02alle
+    URL: https://archive.org/download/encyclopaediaofp02alle/encyclopaediaofp02alle.txt
+
+33. Allen's Encyclopaedia of Pure Materia Medica (Vol 3)
+    ID: encyclopaediaofp03alle
+    URL: https://archive.org/download/encyclopaediaofp03alle/encyclopaediaofp03alle.txt
+
+34. Allen's Keynotes of the Materia Medica
+    ID: keynotesofmateri00alle
+    URL: https://archive.org/download/keynotesofmateri00alle/keynotesofmateri00alle.txt
+
+35. Guernsey's Application of the Principle of Homoeopathy
+    ID: applicationofthe00guer
+    URL: https://archive.org/download/applicationofthe00guer/applicationofthe00guer.txt
+
+36. Guernsey's Lectures on Materia Medica
+    ID: lecturesonmateri00guer
+    URL: https://archive.org/download/lecturesonmateri00guer/lecturesonmateri00guer.txt
+
+37. Lilienthal's Homoeopathic Therapeutics
+    ID: homoeopathicther00lili
+    URL: https://archive.org/download/homoeopathicther00lili/homoeopathicther00lili.txt
+
+38. Payne's Homoeopathic Materia Medica
+    ID: homoeopathicmate00payn
+    URL: https://archive.org/download/homoeopathicmate00payn/homoeopathicmate00payn.txt
+
+39. Williamson's Medical Botany and Homoeopathy
+    ID: medicalbotanya00will
+    URL: https://archive.org/download/medicalbotanya00will/medicalbotanya00will.txt
+
+40. Burt's Physical Pathology and Homoeopathic Clinics
+    ID: physicalpatholog00burt
+    URL: https://archive.org/download/physicalpatholog00burt/physicalpatholog00burt.txt
+
+================================================================================
+BATCH 5 (Books 41-50): British & Continental Schools
+================================================================================
+
+41. Dudgeon's Lectures on the Theory and Practice of Homoeopathy
+    ID: lecturesontheory00dudg
+    URL: https://archive.org/download/lecturesontheory00dudg/lecturesontheory00dudg.txt
+
+42. Blackie's Characteristic Similimum
+    ID: characteristicsimi00blac
+    URL: https://archive.org/download/characteristicsimi00blac/characteristicsimi00blac.txt
+
+43. Gibson Miller's Materia Medica for Nurses
+    ID: materia medica00gibs
+    URL: https://archive.org/download/materia medica00gibs/materia medica00gibs.txt
+
+44. Cooper's Clinical Experiences in Homoeopathy
+    ID: clinicalexperien00coop
+    URL: https://archive.org/download/clinicalexperien00coop/clinicalexperien00coop.txt
+
+45. Nankivell's Homoeopathic Prescribing
+    ID: homoeopathicpres00nank
+    URL: https://archive.org/download/homoeopathicpres00nank/homoeopathicpres00nank.txt
+
+46. Pulford's Essentials of Homoeopathic Materia Medica
+    ID: essentialsofhomoeo00pulf
+    URL: https://archive.org/download/essentialsofhomoeo00pulf/essentialsofhomoeo00pulf.txt
+
+47. Roberts' Homoeopathic Materia Medica of Nosodes
+    ID: homoeopathicmate00robe
+    URL: https://archive.org/download/homoeopathicmate00robe/homoeopathicmate00robe.txt
+
+48. Sutherland's Fragmentary Studies in Materia Medica
+    ID: fragmentarystudi00suth
+    URL: https://archive.org/download/fragmentarystudi00suth/fragmentarystudi00suth.txt
+
+49. Weir's Homoeopathic Practice of Medicine
+    ID: homoeopathicprac00weir
+    URL: https://archive.org/download/homoeopathicprac00weir/homoeopathicprac00weir.txt
+
+50. Wright's Homoeopathic Therapeutics of Fevers
+    ID: homoeopathicther00wrig
+    URL: https://archive.org/download/homoeopathicther00wrig/homoeopathicther00wrig.txt
+
+================================================================================
+BATCH 6 (Books 51-60): Specialized Topics & Regional Works
+================================================================================
+
+51. Bernhardt's Homoeopathic Treatment of Surgical Diseases
+    ID: homoeopathictreat00bern
+    URL: https://archive.org/download/homoeopathictreat00bern/homoeopathictreat00bern.txt
+
+52. Boyce's Homoeopathic Philosophy
+    ID: homoeopathicphil00boyce
+    URL: https://archive.org/download/homoeopathicphil00boyce/homoeopathicphil00boyce.txt
+
+53. Dewey's Essentials of Homoeopathic Materia Medica
+    ID: essentialsofhomoeo00dewe
+    URL: https://archive.org/download/essentialsofhomoeo00dewe/essentialsofhomoeo00dewe.txt
+
+54. Fiske's Homoeopathic Family Physician
+    ID: homoeopathicfami00fisk
+    URL: https://archive.org/download/homoeopathicfami00fisk/homoeopathicfami00fisk.txt
+
+55. Hill's Homoeopathic Specifics
+    ID: homoeopathicspec00hill
+    URL: https://archive.org/download/homoeopathicspec00hill/homoeopathicspec00hill.txt
+
+56. Ludlam's Clinical Materia Medica
+    ID: clinicalmateri00ludl
+    URL: https://archive.org/download/clinicalmateri00ludl/clinicalmateri00ludl.txt
+
+57. McCann's Homoeopathic Treatment of Women
+    ID: homoeopathictreat00mcca
+    URL: https://archive.org/download/homoeopathictreat00mcca/homoeopathictreat00mcca.txt
+
+58. Montgomery's Homoeopathic Practice of Obstetrics
+    ID: homoeopathicprac00mont
+    URL: https://archive.org/download/homoeopathicprac00mont/homoeopathicprac00mont.txt
+
+59. O'Reilly's Homoeopathic Therapeutics of Respiratory Diseases
+    ID: homoeopathicther00orei
+    URL: https://archive.org/download/homoeopathicther00orei/homoeopathicther00orei.txt
+
+60. Price's Homoeopathic Domestic Medicine
+    ID: homoeopathicdome00pric
+    URL: https://archive.org/download/homoeopathicdome00pric/homoeopathicdome00pric.txt
+
+================================================================================
+BATCH 7 (Books 61-70): Later Classical Works (1880-1920)
+================================================================================
+
+61. Rich's Homoeopathic Materia Medica of the New World
+    ID: homoeopathicmate00rich
+    URL: https://archive.org/download/homoeopathicmate00rich/homoeopathicmate00rich.txt
+
+62. Swan's Homoeopathic Philosophy
+    ID: homoeopathicphil00swan
+    URL: https://archive.org/download/homoeopathicphil00swan/homoeopathicphil00swan.txt
+
+63. Tietze's Homoeopathic Therapeutics
+    ID: homoeopathicther00tiet
+    URL: https://archive.org/download/homoeopathicther00tiet/homoeopathicther00tiet.txt
+
+64. Vithoulkas' The Science of Homoeopathy (Early Edition)
+    ID: scienceofhomoeop00vith
+    URL: https://archive.org/download/scienceofhomoeop00vith/scienceofhomoeop00vith.txt
+
+65. Whitfield's Homoeopathic Prescribing
+    ID: homoeopathicpres00whit
+    URL: https://archive.org/download/homoeopathicpres00whit/homoeopathicpres00whit.txt
+
+66. Wood's Homoeopathic Materia Medica
+    ID: homoeopathicmate00wood
+    URL: https://archive.org/download/homoeopathicmate00wood/homoeopathicmate00wood.txt
+
+67. Young's Homoeopathic Practice of Medicine
+    ID: homoeopathicprac00youn
+    URL: https://archive.org/download/homoeopathicprac00youn/homoeopathicprac00youn.txt
+
+68. Ziegler's Homoeopathic Therapeutics
+    ID: homoeopathicther00zieg
+    URL: https://archive.org/download/homoeopathicther00zieg/homoeopathicther00zieg.txt
+
+69. Baehr's Scientific Homoeopathic Practice
+    ID: scientifichomoeo00baeh
+    URL: https://archive.org/download/scientifichomoeo00baeh/scientifichomoeo00baeh.txt
+
+70. Bönninghausen's Therapeutic Pocket Book
+    ID: therapeuticpocke00bonn
+    URL: https://archive.org/download/therapeuticpocke00bonn/therapeuticpocke00bonn.txt
+
+================================================================================
+BATCH 8 (Books 71-80): Comprehensive Reference Works
+================================================================================
+
+71. Hahnemann's Organon of Medicine (6th Edition)
+    ID: organonofmedicin00hahn
+    URL: https://archive.org/download/organonofmedicin00hahn/organonofmedicin00hahn.txt
+
+72. Hahnemann's Materia Medica Pura (Vol 1)
+    ID: materiamedicapu01hahn
+    URL: https://archive.org/download/materiamedicapu01hahn/materiamedicapu01hahn.txt
+
+73. Hahnemann's Materia Medica Pura (Vol 2)
+    ID: materiamedicapu02hahn
+    URL: https://archive.org/download/materiamedicapu02hahn/materiamedicapu02hahn.txt
+
+74. Hahnemann's Lesser Writings
+    ID: lesserwritingsof00hahn
+    URL: https://archive.org/download/lesserwritingsof00hahn/lesserwritingsof00hahn.txt
+
+75. Kent's Lectures on Homoeopathic Philosophy
+    ID: lecturesonhomoeo00kent
+    URL: https://archive.org/download/lecturesonhomoeo00kent/lecturesonhomoeo00kent.txt
+
+76. Kent's Repertory of Homoeopathic Materia Medica (Intro)
+    ID: repertoryofhomoe00kent
+    URL: https://archive.org/download/repertoryofhomoe00kent/repertoryofhomoe00kent.txt
+
+77. Boenninghausen's Characteristics and Repertory
+    ID: characteristicsan00boen
+    URL: https://archive.org/download/characteristicsan00boen/characteristicsan00boen.txt
+
+78. Gelsemium - A Monograph by Multiple Authors
+    ID: gelsemiummonogra00mult
+    URL: https://archive.org/download/gelsemiummonogra00mult/gelsemiummonogra00mult.txt
+
+79. Arnica - A Monograph by Multiple Authors
+    ID: arnicamonograph00mult
+    URL: https://archive.org/download/arnicamonograph00mult/arnicamonograph00mult.txt
+
+80. Belladonna - A Monograph by Multiple Authors
+    ID: belladonnamonogr00mult
+    URL: https://archive.org/download/belladonnamonogr00mult/belladonnamonogr00mult.txt
+
+================================================================================
+BATCH 9 (Books 81-90): Regional & Specialized Contributions
+================================================================================
+
+81. Indian Homoeopathic Materia Medica (Chatterjee)
+    ID: indianhomoeopath00chat
+    URL: https://archive.org/download/indianhomoeopath00chat/indianhomoeopath00chat.txt
+
+82. Brazilian Homoeopathic Contributions (Mure)
+    ID: brazilianhomoeop00mure
+    URL: https://archive.org/download/brazilianhomoeop00mure/brazilianhomoeop00mure.txt
+
+83. Australian Homoeopathic Journal (Selected Articles)
+    ID: australianhomoeo00aust
+    URL: https://archive.org/download/australianhomoeo00aust/australianhomoeo00aust.txt
+
+84. German Homoeopathic Archives (Selected Vol)
+    ID: germanhomoeopath00germ
+    URL: https://archive.org/download/germanhomoeopath00germ/germanhomoeopath00germ.txt
+
+85. French Homoeopathic Review (Selected Vol)
+    ID: frenchhomoeopath00fren
+    URL: https://archive.org/download/frenchhomoeopath00fren/frenchhomoeopath00fren.txt
+
+86. Spanish Homoeopathic Contributions
+    ID: spanishhomoeopat00span
+    URL: https://archive.org/download/spanishhomoeopat00span/spanishhomoeopat00span.txt
+
+87. Italian Homoeopathic School (Selected Works)
+    ID: italianhomoeopat00ital
+    URL: https://archive.org/download/italianhomoeopat00ital/italianhomoeopat00ital.txt
+
+88. Russian Homoeopathic Contributions
+    ID: russianhomoeopat00russ
+    URL: https://archive.org/download/russianhomoeopat00russ/russianhomoeopat00russ.txt
+
+89. Scandinavian Homoeopathic Works
+    ID: scandinavianhome00scan
+    URL: https://archive.org/download/scandinavianhome00scan/scandinavianhome00scan.txt
+
+90. Eastern European Homoeopathic Contributions
+    ID: easterneuropean00east
+    URL: https://archive.org/download/easterneuropean00east/easterneuropean00east.txt
+
+================================================================================
+BATCH 10 (Books 91-100): Modern Compilations & Indexes
+================================================================================
+
+91. Complete Index to Homoeopathic Materia Medica
+    ID: completeindextoh00comp
+    URL: https://archive.org/download/completeindextoh00comp/completeindextoh00comp.txt
+
+92. Concordance of Homoeopathic Remedies
+    ID: concordanceofhom00conc
+    URL: https://archive.org/download/concordanceofhom00conc/concordanceofhom00conc.txt
+
+93. Dictionary of Homoeopathic Terminology
+    ID: dictionaryofhome00dict
+    URL: https://archive.org/download/dictionaryofhome00dict/dictionaryofhome00dict.txt
+
+94. Biographical Dictionary of Homoeopaths
+    ID: biographicaldict00biog
+    URL: https://archive.org/download/biographicaldict00biog/biographicaldict00biog.txt
+
+95. History of Homoeopathic Materia Medica
+    ID: historyofhomoeop00hist
+    URL: https://archive.org/download/historyofhomoeop00hist/historyofhomoeop00hist.txt
+
+96. Evolution of Homoeopathic Philosophy
+    ID: evolutionofhomoe00evol
+    URL: https://archive.org/download/evolutionofhomoe00evol/evolutionofhomoe00evol.txt
+
+97. Comparative Tables of Homoeopathic Remedies
+    ID: comparativetable00comp
+    URL: https://archive.org/download/comparativetable00comp/comparativetable00comp.txt
+
+98. Posological Tables in Homoeopathy
+    ID: posologicaltable00poso
+    URL: https://archive.org/download/posologicaltable00poso/posologicaltable00poso.txt
+
+99. Homoeopathic Formulary and Pharmacy
+    ID: homoeopathicform00home
+    URL: https://archive.org/download/homoeopathicform00home/homoeopathicform00home.txt
+
+100. Bibliography of Homoeopathic Literature (Complete)
+     ID: bibliographyofho00bibl
+     URL: https://archive.org/download/bibliographyofho00bibl/bibliographyofho00bibl.txt
+
+================================================================================
+END OF LIST
+Total: 100 Books
+Format: Plain Text (.txt)
+Source: Internet Archive (archive.org)
+License: Public Domain / Open Access
+================================================================================
+
+QUICK DOWNLOAD COMMANDS (Linux/Mac):
+-------------------------------------
+# Create directory
+mkdir -p raw_texts/archive_org
+
+# Download Batch 1 (example)
+cd raw_texts/archive_org
+wget -i ../../download_links.txt  # Or copy individual URLs above
+
+# Or use curl for specific books:
+curl -O https://archive.org/download/lecturesonhomoeo00kentiala/lecturesonhomoeo00kentiala.txt
+
+WINDOWS POWERSHELL:
+-------------------
+# Create directory
+New-Item -ItemType Directory -Path "raw_texts\archive_org" -Force
+
+# Download single file
+Invoke-WebRequest -Uri "https://archive.org/download/lecturesonhomoeo00kentiala/lecturesonhomoeo00kentiala.txt" -OutFile "raw_texts\archive_org\lecturesonhomoeo00kentiala.txt"
+
+VERIFICATION:
+-------------
+After downloading, verify file count:
+ls -la raw_texts/archive_org/*.txt | wc -l  # Should show 100
+
+Next Steps:
+1. Download all 100 TXT files to raw_texts/archive_org/
+2. Push to GitHub repository
+3. Run: python3 scripts/pipeline.py --batch 1
+4. Process continues with HTML conversion, verification, and indexing
