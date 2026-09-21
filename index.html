@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Materia Medica Builder - Personal research tool for homeopathic practitioners">
+    <meta name="theme-color" content="#0d9488">
+    <title>Materia Medica Builder</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Tailwind CSS (CDN for offline-first, can be downloaded) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        secondary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-primary-600 dark:bg-primary-800 text-white shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                    <h1 class="text-xl font-bold">Materia Medica Builder</h1>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg hover:bg-primary-700 dark:hover:bg-primary-700 transition-colors" aria-label="Toggle dark mode">
+                    <svg id="sunIcon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg id="moonIcon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 container mx-auto px-4 py-6 pb-24 md:pb-6">
+            <nav id="desktopNav" class="hidden md:flex gap-2 mb-6 overflow-x-auto">
+                <button data-page="dashboard" class="nav-btn active px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors whitespace-nowrap">Dashboard</button>
+                <button data-page="remedies" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Remedies Library</button>
+                <button data-page="cases" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Case Logger</button>
+                <button data-page="settings" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Settings</button>
+            </nav>
+
+            <div id="content" class="page-content">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </main>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav id="mobileNav" class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 shadow-lg z-50">
+            <div class="flex justify-around py-2">
+                <button data-page="dashboard" class="mobile-nav-btn active flex flex-col items-center p-2 text-primary-600 dark:text-primary-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    <span class="text-xs mt-1">Dashboard</span>
+                </button>
+                <button data-page="remedies" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                    <span class="text-xs mt-1">Remedies</span>
+                </button>
+                <button data-page="cases" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                    </svg>
+                    <span class="text-xs mt-1">Cases</span>
+                </button>
+                <button data-page="settings" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span class="text-xs mt-1">Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registered:', reg.scope))
+                .catch(err => console.error('Service Worker registration failed:', err));
+        }
+    </script>
+    
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>

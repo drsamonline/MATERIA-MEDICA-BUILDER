@@ -1,0 +1,26 @@
+{
+    "name": "Materia Medica Builder",
+    "short_name": "Materia Medica",
+    "description": "Personal research tool for homeopathic practitioners to document clinical cases and build custom Materia Medica",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#f8fafc",
+    "theme_color": "#0d9488",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["medical", "health", "productivity"],
+    "lang": "en-US"
+}
