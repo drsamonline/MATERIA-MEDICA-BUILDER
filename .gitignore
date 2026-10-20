@@ -1,10 +1,12 @@
 ```
 # Dependencies
-materia-medica-builder/
+node_modules/
 
-# Logs and temp files
-*.log
-*.tmp
+# Build artifacts
+dist/
+build/
+*.js.map
+*.css.map
 
 # Environment
 .env
@@ -14,8 +16,17 @@ materia-medica-builder/
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Python
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python (if applicable)
 __pycache__/
 *.pyc
 *.pyo
@@ -24,16 +35,4 @@ __pycache__/
 venv/
 .venv/
 .env
-.env.local
-.env.*
-.pytest_cache/
-.mypy_cache/
-.coverage
-coverage/
-htmlcov/
-
-# Build artifacts
-dist/
-build/
-*.egg-info/
 ```
