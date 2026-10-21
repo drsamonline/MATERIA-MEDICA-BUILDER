@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materia Medica Builder — build your own materia medica &amp; repertory offline</title>
+<meta name="description" content="A dependency-free, offline-first PWA for assembling a personal materia medica and repertory by hand — then exporting it as JSON, CSV, Excel, PDF, HTML, SQL or SQLite. No server, no account, no tracking.">
+<meta name="keywords" content="materia medica builder, homeopathy repertory, materia medica app, offline PWA, homeopathic software, repertory builder, Kent grading, Boenninghausen, export materia medica, IndexedDB, vanilla JavaScript, OMM reader">
+<meta name="author" content="Dr Sohil Momin">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#fbfbfd">
+<link rel="canonical" href="https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/">
+<link rel="icon" href="play/icons/icon-192.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="play/icons/icon-192.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Materia Medica Builder">
+<meta property="og:title" content="Materia Medica Builder — your own materia medica &amp; repertory, offline">
+<meta property="og:description" content="Assemble a personal materia medica and repertory by hand. Offline-first, private, dependency-free — export as JSON, CSV, Excel, PDF, HTML, SQL or SQLite.">
+<meta property="og:url" content="https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/">
+<meta property="og:image" content="https://socialify.git.ci/drsamonline/MATERIA-MEDICA-BUILDER/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Light&amp;font=Inter">
+<meta property="og:image:alt" content="Materia Medica Builder repository card">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Materia Medica Builder — your own materia medica &amp; repertory, offline">
+<meta name="twitter:description" content="Assemble a personal materia medica and repertory by hand. Offline-first, private, dependency-free — export as JSON, CSV, Excel, PDF, HTML, SQL or SQLite.">
+<meta name="twitter:image" content="https://socialify.git.ci/drsamonline/MATERIA-MEDICA-BUILDER/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Light&amp;font=Inter">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Materia Medica Builder",
+  "applicationCategory": "HealthApplication",
+  "applicationSubCategory": "Homeopathy",
+  "operatingSystem": "Any (web browser)",
+  "description": "A dependency-free, offline-first Progressive Web App for building a personal materia medica and repertory by hand, with export to JSON, CSV, Excel, PDF, HTML, SQL and SQLite.",
+  "url": "https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/",
+  "softwareVersion": "1.1",
+  "license": "https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/blob/main/LICENSE",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "author": {
+    "@type": "Person",
+    "name": "Dr Sohil Momin",
+    "honorificSuffix": "BHMS",
+    "url": "https://github.com/drsamonline"
+  },
+  "codeRepository": "https://github.com/drsamonline/MATERIA-MEDICA-BUILDER",
+  "keywords": "materia medica, repertory, homeopathy, offline PWA, IndexedDB, vanilla JavaScript"
+}
+</script>
+
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --canvas:#fbfbfd;
+  --panel:#ffffff;
+  --panel-2:#f5f6fa;
+  --ink:#15171e;
+  --ink-2:#3b4050;
+  --muted:#666c7e;
+  --line:#e5e7ef;
+  --line-2:#d8dbe7;
+  --indigo:#4338ca;
+  --indigo-2:#372fa8;
+  --indigo-soft:#eef0fc;
+  --indigo-line:#c9cdf2;
+  --ok:#0f766e;
+  --radius:10px;
+  --radius-lg:14px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Helvetica Neue",Arial,sans-serif;
+  --shadow:0 1px 2px rgba(21,23,30,.05),0 8px 24px -16px rgba(21,23,30,.18);
+  --shadow-lg:0 1px 3px rgba(21,23,30,.06),0 24px 48px -28px rgba(67,56,202,.30);
+  --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--canvas);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:var(--indigo);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.02em;font-weight:650}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-size:.86em}
+:focus-visible{outline:2px solid var(--indigo);outline-offset:2px;border-radius:4px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,251,253,.86);
+  backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;gap:16px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.02em;color:var(--ink)}
+.brand:hover{text-decoration:none}
+.brand svg{width:26px;height:26px;flex:none}
+.brand .sub{display:block;font-weight:450;font-size:11.5px;color:var(--muted);letter-spacing:0;font-family:var(--mono)}
+.nav-links{display:flex;gap:22px;margin-left:auto;align-items:center}
+.nav-links a{color:var(--ink-2);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--indigo);text-decoration:none}
+.nav-cta{
+  font-size:13.5px;font-weight:600;color:#fff;background:var(--indigo);
+  padding:8px 15px;border-radius:8px;
+}
+.nav-cta:hover{background:var(--indigo-2);text-decoration:none}
+.nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--line-2);border-radius:8px;padding:6px 8px;color:var(--ink);cursor:pointer}
+
+/* ---------- shell / rail ---------- */
+.shell{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:196px minmax(0,1fr);gap:44px;align-items:start}
+.rail{position:sticky;top:76px;align-self:start;padding-top:52px}
+.rail h4{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-family:var(--mono);font-weight:600;margin-bottom:14px}
+.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rail a{
+  display:flex;gap:10px;align-items:baseline;
+  padding:7px 10px;border-radius:7px;border-left:2px solid transparent;
+  color:var(--ink-2);font-size:13.5px;font-weight:500;
+}
+.rail a:hover{background:var(--panel);color:var(--indigo);text-decoration:none}
+.rail a b{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
+.rail .rail-note{margin-top:22px;padding:12px;border:1px dashed var(--line-2);border-radius:var(--radius);font-size:12px;color:var(--muted);background:var(--panel-2)}
+.rail .rail-note code{font-family:var(--mono);color:var(--indigo);font-size:11.5px}
+.col{min-width:0}
+
+/* ---------- sections ---------- */
+section{padding:56px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--indigo);background:var(--indigo-soft);border:1px solid var(--indigo-line);
+  padding:4px 10px;border-radius:999px;font-weight:600;
+}
+.h2{font-size:clamp(24px,3.4vw,33px);margin:16px 0 10px}
+.lede{color:var(--muted);font-size:16.5px;max-width:66ch}
+
+/* ---------- hero ---------- */
+.hero{padding:52px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:20px 0 0;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--indigo)}
+.hero .pitch{font-size:18px;color:var(--ink-2);margin-top:16px;max-width:56ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 20px;border-radius:9px;font-size:15px;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:transform .12s ease,background .12s ease,border-color .12s ease;
+}
+.btn svg{width:17px;height:17px;flex:none}
+.btn-primary{background:var(--indigo);color:#fff;box-shadow:var(--shadow-lg)}
+.btn-primary:hover{background:var(--indigo-2);text-decoration:none;transform:translateY(-1px)}
+.btn-ghost{background:var(--panel);color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--indigo-line);color:var(--indigo);text-decoration:none;transform:translateY(-1px)}
+.hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px}
+.hero-meta svg{width:13px;height:13px;color:var(--ok)}
+
+/* ---------- workbench panel (hero visual) ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.panel-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);
+  background:var(--panel-2);
+}
+.panel-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--line-2)}
+.panel-bar .dot.i{background:var(--indigo)}
+.panel-bar .title{margin-left:6px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.panel-body{padding:16px}
+.flow{display:flex;flex-direction:column;gap:10px}
+.step{
+  display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--canvas);
+}
+.step .n{font-family:var(--mono);font-size:11px;color:var(--indigo);background:var(--indigo-soft);border:1px solid var(--indigo-line);border-radius:6px;padding:2px 7px;flex:none}
+.step .lbl{font-size:14px;font-weight:550;color:var(--ink)}
+.step .field{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.connector{height:16px;margin-left:26px;border-left:2px dashed var(--indigo-line)}
+.out-head{display:flex;align-items:center;gap:8px;margin:16px 0 10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.out-head::after{content:"";flex:1;height:1px;background:var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--indigo);
+  background:var(--indigo-soft);border:1px solid var(--indigo-line);border-radius:6px;padding:4px 9px;
+}
+
+/* ---------- badges ---------- */
+.badge-strip{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.badge-strip img{height:20px;display:block}
+.cbadge{
+  display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;font-weight:600;
+  color:var(--ink-2);background:var(--panel);border:1px solid var(--line-2);border-radius:999px;padding:4px 11px;
+}
+.cbadge svg{width:13px;height:13px;color:var(--indigo)}
+.cbadge.ok svg{color:var(--ok)}
+
+/* ---------- feature cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px;margin-top:26px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:20px;box-shadow:var(--shadow);position:relative;
+  transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease;
+}
+.card:hover{border-color:var(--indigo-line);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.card .ic{
+  width:36px;height:36px;border-radius:9px;display:grid;place-items:center;
+  background:var(--indigo-soft);border:1px solid var(--indigo-line);color:var(--indigo);margin-bottom:13px;
+}
+.card .ic svg{width:19px;height:19px}
+.card h3{font-size:16.5px;margin-bottom:7px}
+.card p{color:var(--muted);font-size:14.5px}
+.card .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.card .tags code{font-family:var(--mono);font-size:11px;color:var(--indigo);background:var(--indigo-soft);border:1px solid var(--indigo-line);border-radius:5px;padding:2px 7px}
+
+/* ---------- how it works ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;margin-top:28px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--panel);overflow:hidden;box-shadow:var(--shadow)}
+.stepcell{padding:22px 20px;border-right:1px solid var(--line);position:relative}
+.stepcell:last-child{border-right:0}
+.stepcell .k{font-family:var(--mono);font-size:12px;color:var(--indigo);font-weight:600}
+.stepcell h3{font-size:15.5px;margin:9px 0 7px}
+.stepcell p{color:var(--muted);font-size:14px}
+.stepcell::after{
+  content:"";position:absolute;top:34px;right:-7px;width:12px;height:12px;
+  border-top:2px solid var(--indigo-line);border-right:2px solid var(--indigo-line);
+  transform:rotate(45deg);background:var(--panel);z-index:1;
+}
+.stepcell:last-child::after{display:none}
+
+/* ---------- code ---------- */
+.code{
+  background:#12141c;color:#e7e9f3;border-radius:var(--radius-lg);padding:16px 18px;
+  font-family:var(--mono);font-size:13px;line-height:1.7;overflow-x:auto;border:1px solid #22252f;
+}
+.code .c{color:#8b90a8}
+.code .p{color:#8ea2ff}
+.code .g{color:#7fd6a8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;margin-top:26px}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.list li{display:flex;gap:11px;font-size:14.5px;color:var(--ink-2)}
+.list li svg{width:16px;height:16px;flex:none;margin-top:4px;color:var(--indigo)}
+.list li b{color:var(--ink);font-weight:600}
+
+/* ---------- screenshots ---------- */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:26px}
+.shot{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:top center;border-bottom:1px solid var(--line);background:var(--panel-2)}
+.shot figcaption{padding:11px 14px;font-size:13px;color:var(--muted)}
+.shot figcaption b{color:var(--ink);display:block;font-size:13.5px;font-weight:600}
+
+/* ---------- faq ---------- */
+.faq{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+details.q{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+details.q[open]{border-color:var(--indigo-line)}
+details.q summary{
+  cursor:pointer;list-style:none;padding:15px 18px;font-weight:600;font-size:15px;
+  display:flex;align-items:center;gap:12px;
+}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{
+  content:"";width:8px;height:8px;margin-left:auto;flex:none;
+  border-right:2px solid var(--indigo);border-bottom:2px solid var(--indigo);
+  transform:rotate(45deg);transition:transform .18s ease;
+}
+details.q[open] summary::after{transform:rotate(-135deg)}
+details.q .a{padding:0 18px 17px;color:var(--muted);font-size:14.5px}
+details.q .a code{font-family:var(--mono);font-size:12.5px;background:var(--panel-2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--indigo)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);background:var(--panel);margin-top:0}
+.foot{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;padding:34px 0}
+.foot .fcol{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--muted)}
+.foot .fcol b{color:var(--ink);font-weight:600}
+.foot a{color:var(--ink-2)}
+.foot a:hover{color:var(--indigo)}
+.foot-links{display:flex;flex-wrap:wrap;gap:18px}
+.foot-bottom{border-top:1px solid var(--line);padding:16px 0;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+.heart{color:var(--indigo)}
+
+/* ---------- reveal (JS-gated: nothing is hidden if JS is off) ---------- */
+.reveal{transition:opacity .5s ease,transform .5s ease}
+html.js .reveal:not(.in){opacity:0;transform:translateY(14px)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .rail{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .two{grid-template-columns:1fr}
+  .stepcell{border-right:0;border-bottom:1px solid var(--line)}
+  .stepcell::after{display:none}
+  .nav-links{
+    display:none;position:absolute;top:60px;left:0;right:0;background:var(--panel);
+    border-bottom:1px solid var(--line);flex-direction:column;gap:0;padding:8px 24px 16px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:10px 0;border-bottom:1px solid var(--line);width:100%}
+  .nav-toggle{display:block}
+}
+@media (max-width:560px){
+  section{padding:42px 0}
+  .wrap,.shell{padding:0 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Materia Medica Builder — home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/>
+        <path d="M2 21c0-3 1.9-5.4 5.1-6"/>
+      </svg>
+      <span>Materia Medica Builder<span class="sub">v1.1 · offline-first</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Screenshots</a>
+      <a href="#start">Get started</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="play/">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ================= SHELL ================= -->
+<div class="shell">
+
+  <!-- ---------- left rail ---------- -->
+  <aside class="rail" aria-label="Section index">
+    <h4>Workbench</h4>
+    <ol>
+      <li><a href="#overview"><b>01</b> Overview</a></li>
+      <li><a href="#features"><b>02</b> Features</a></li>
+      <li><a href="#how"><b>03</b> How it works</a></li>
+      <li><a href="#demo"><b>04</b> Screenshots</a></li>
+      <li><a href="#exports"><b>05</b> Exports</a></li>
+      <li><a href="#start"><b>06</b> Get started</a></li>
+      <li><a href="#faq"><b>07</b> FAQ</a></li>
+    </ol>
+    <p class="rail-note">Everything lives in <code>IndexedDB</code> in your browser. Export a backup often.</p>
+  </aside>
+
+  <!-- ---------- content column ---------- -->
+  <main class="col">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="overview">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+        Progressive Web App · zero dependencies
+      </span>
+      <h1>Build your own <em>materia medica</em> &amp; repertory.</h1>
+      <p class="pitch">A precise, tool-like workbench for the practitioner who writes their own book — remedies, symptoms, rubrics and grades defined and edited by hand, kept entirely on your device, and exported in whatever shape you need.</p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="play/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3Z"/></svg>
+          Open the app
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/drsamonline/MATERIA-MEDICA-BUILDER" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Works fully offline</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> No account, no tracking</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 8 export formats</span>
+      </div>
+
+      <div class="badge-strip">
+        <img src="https://img.shields.io/github/stars/drsamonline/MATERIA-MEDICA-BUILDER?style=flat-square&amp;label=stars" alt="GitHub stars" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER?style=flat-square&amp;label=last%20commit" alt="Last commit" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER?style=flat-square&amp;label=repo%20size" alt="Repo size" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://img.shields.io/github/license/drsamonline/MATERIA-MEDICA-BUILDER?style=flat-square&amp;label=licence" alt="Licence" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <div class="badge-strip">
+        <span class="cbadge ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg> Offline-first</span>
+        <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg> Zero dependencies</span>
+        <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg> Vanilla JavaScript</span>
+        <span class="cbadge ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg> Installable PWA</span>
+        <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/></svg> Local IndexedDB</span>
+        <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> 8 export formats</span>
+      </div>
+    </section>
+
+    <!-- ===== WORKBENCH PANEL ===== -->
+    <section aria-label="How content becomes structured output">
+      <div class="panel reveal">
+        <div class="panel-bar">
+          <span class="dot i"></span><span class="dot"></span><span class="dot"></span>
+          <span class="title">workbench · content in → structured out</span>
+        </div>
+        <div class="panel-body">
+          <div class="flow">
+            <div class="step"><span class="n">01</span><span class="lbl">Remedy</span><span class="field">Acon · Aconitum napellus</span></div>
+            <div class="connector"></div>
+            <div class="step"><span class="n">02</span><span class="lbl">Symptom</span><span class="field">Mind · fear · grade 3</span></div>
+            <div class="connector"></div>
+            <div class="step"><span class="n">03</span><span class="lbl">Rubric</span><span class="field">Anxiety, about health</span></div>
+            <div class="connector"></div>
+            <div class="step"><span class="n">04</span><span class="lbl">Graded remedy link</span><span class="field">Acon (3) · polarity +</span></div>
+          </div>
+          <div class="out-head">Exports</div>
+          <div class="chips">
+            <span class="chip">JSON backup</span>
+            <span class="chip">JSON · OMM v1.1</span>
+            <span class="chip">CSV</span>
+            <span class="chip">XLSX</span>
+            <span class="chip">PDF book</span>
+            <span class="chip">HTML</span>
+            <span class="chip">SQL</span>
+            <span class="chip">SQLite</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features">
+      <span class="eyebrow">What it does</span>
+      <h2 class="h2">A complete kit for building the book yourself</h2>
+      <p class="lede">Six working surfaces, one local database. Nothing is templated for you — every remedy, rubric and grade is yours to define.</p>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div>
+          <h3>Materia Medica</h3>
+          <p>Remedies with name, abbreviation, common name, kingdom, family, source and notes. Add any number of symptoms to each, with a chapter, grade and modalities.</p>
+          <div class="tags"><code>name</code><code>abbrev</code><code>kingdom</code><code>family</code><code>modalities</code></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+          <h3>Repertory</h3>
+          <p>Chapters (Mind, Head, Stomach…) hold rubrics; rubrics hold graded remedies. Each rubric supports a parent heading and a note, so <em>Morning</em> under <em>Sweat of the feet</em> reads correctly.</p>
+          <div class="tags"><code>chapter</code><code>rubric</code><code>parent</code><code>grade</code><code>polarity</code></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7L6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3Z"/></svg></div>
+          <h3>Your marking scale</h3>
+          <p>Four schemes ship in — Kent 3-point, 4-point with capitals, Boenninghausen 5-point and Simple 0–2 — or define your own: any number of levels, each with a label and a typographic style.</p>
+          <div class="tags"><code>plain</code><code>italic</code><code>bold</code><code>capitals</code><code>superscript</code></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Author &amp; branding</h3>
+          <p>Your name, credentials, clinic, email, website, book title, edition, year, copyright line and licence — stamped into every PDF, HTML file and workbook you export.</p>
+          <div class="tags"><code>author</code><code>book title</code><code>copyright</code></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <h3>Private case log</h3>
+          <p>A private case logger: record a case and track the outcome across Cured, Improved, No Change, Aggravated and Suppressed — then review the history.</p>
+          <div class="tags"><code>outcome</code><code>potency</code><code>follow-up</code></div>
+        </article>
+
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9a2.9 2.9 0 0 1 5.6 1c0 1.9-2.8 2.2-2.8 3.9"/><path d="M12 17.2h.01"/></svg></div>
+          <h3>Help built in</h3>
+          <p>The full how-to guide lives inside the app, alongside a first-run spotlight tour you can replay any time and a print-to-PDF of the guide itself.</p>
+          <div class="tags"><code>guide</code><code>tour</code><code>print-to-PDF</code></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2">Four moves from a blank page to a finished book</h2>
+      <p class="lede">The same guide is built into the app — open the Help tab, or press <em>Take the tour</em>.</p>
+
+      <div class="steps">
+        <div class="stepcell reveal">
+          <span class="k">Step 01</span>
+          <h3>Add remedies</h3>
+          <p>Open Materia Medica and add your first remedy — or edit the three starters. Give it a short abbreviation like <span class="mono">Acon</span> or <span class="mono">Nat-m</span>; that is what the repertory displays.</p>
+        </div>
+        <div class="stepcell reveal">
+          <span class="k">Step 02</span>
+          <h3>Write symptoms</h3>
+          <p>Attach symptoms to a remedy: pick a chapter, write the symptom, set a grade. Modalities carry a direction and text.</p>
+        </div>
+        <div class="stepcell reveal">
+          <span class="k">Step 03</span>
+          <h3>Build rubrics</h3>
+          <p>Add a chapter, then rubrics inside it. Type a remedy abbreviation and press Enter to attach it, then choose its grade.</p>
+        </div>
+        <div class="stepcell reveal">
+          <span class="k">Step 04</span>
+          <h3>Fill in &amp; export</h3>
+          <p>Complete your Author details, then open Data and export your book as JSON, CSV, Excel, PDF, HTML, SQL or SQLite.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREENSHOTS / DEMO ===== -->
+    <section id="demo">
+      <span class="eyebrow">A look around</span>
+      <h2 class="h2">See the workbench</h2>
+      <p class="lede">Every screen below is the real app. <a href="play/">Open the live demo</a> — it runs entirely in your browser, no sign-in.</p>
+
+      <div class="shots">
+        <figure class="shot reveal">
+          <img src="screenshots/dashboard.jpg" alt="Materia Medica Builder dashboard" loading="lazy" width="860" height="538">
+          <figcaption><b>Dashboard</b>Your project at a glance — remedies, rubrics and cases.</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="screenshots/materia-medica.jpg" alt="Materia Medica tab with remedies and symptoms" loading="lazy">
+          <figcaption><b>Materia Medica</b>Remedies, symptoms, chapters and grades.</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="screenshots/repertory.jpg" alt="Repertory tab with rubrics carrying graded remedies" loading="lazy">
+          <figcaption><b>Repertory</b>Rubrics carrying graded remedies.</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="screenshots/marking.jpg" alt="Marking tab with a custom grading scale" loading="lazy">
+          <figcaption><b>Marking</b>Define your own grading scale.</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="screenshots/data.jpg" alt="Data tab with export and import options" loading="lazy">
+          <figcaption><b>Data</b>Export and import in eight formats.</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="screenshots/tour-welcome.jpg" alt="First-run guided tour" loading="lazy">
+          <figcaption><b>First-run tour</b>A guided walk through the app.</figcaption>
+        </figure>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="play/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3Z"/></svg>
+          Open the live demo
+        </a>
+        <a class="btn btn-ghost" href="play/#help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+          Read the built-in guide
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== EXPORTS ===== -->
+    <section id="exports">
+      <span class="eyebrow">Export &amp; import</span>
+      <h2 class="h2">Your book, in whatever shape you need</h2>
+      <p class="lede">The <span class="mono">.xlsx</span>, <span class="mono">.pdf</span> and <span class="mono">.sqlite</span> files are generated byte-by-byte in JavaScript — no library from a CDN, and no network connection required.</p>
+
+      <div class="two">
+        <ul class="list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>JSON — full backup.</b> Everything, re-importable here to restore the project.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>JSON — OMM.</b> Repertory and/or materia medica in the reader-app schema (v1.1).</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>CSV.</b> All datasets as a zip, or one dataset at a time.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Excel (.xlsx).</b> A workbook: Info, Remedies, Symptoms, Repertory, Cases, Marking.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>PDF.</b> A printable book with your author block and copyright.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>HTML.</b> A self-contained, styled document you can open or host.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>SQL (.sql).</b> Portable <span class="mono">INSERT</span> statements for SQLite, Postgres or MySQL.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>SQLite (.sqlite).</b> A real database file — <span class="mono">meta</span>, <span class="mono">remedy</span>, <span class="mono">symptom</span>, <span class="mono">rubric</span>, <span class="mono">remedy_link</span>, <span class="mono">case_log</span>.</span></li>
+        </ul>
+
+        <div>
+          <div class="panel" style="margin-bottom:18px">
+            <div class="panel-bar"><span class="dot i"></span><span class="dot"></span><span class="dot"></span><span class="title">importers.js</span></div>
+            <div class="panel-body">
+              <p style="font-size:14.5px;color:var(--muted)">Import accepts a full JSON backup, an OMM repertory or materia-medica file, or CSV — with <b style="color:var(--ink)">Merge</b> or <b style="color:var(--ink)">Replace</b> mode.</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-bar"><span class="dot i"></span><span class="dot"></span><span class="dot"></span><span class="title">omm schema · v1.1</span></div>
+            <div class="panel-body">
+              <div class="code">{
+  <span class="p">"schema_version"</span>: <span class="g">"1.1"</span>,
+  <span class="p">"type"</span>: <span class="g">"repertory"</span>,
+  <span class="p">"book"</span>: { <span class="c">/* provenance */</span> },
+  <span class="p">"sections"</span>: [ { <span class="p">"rubrics"</span>: [
+      { <span class="p">"remedy_table"</span>: [] } ] } ]
+}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GET STARTED ===== -->
+    <section id="start">
+      <span class="eyebrow">Get started</span>
+      <h2 class="h2">Open it, or run it yourself</h2>
+      <p class="lede">There is no build step and nothing to install. The app is plain HTML, CSS and JavaScript, and the service worker takes it offline automatically.</p>
+
+      <div class="two">
+        <div>
+          <h3 style="font-size:15px;margin-bottom:12px">Run it locally</h3>
+          <div class="code"><span class="c"># clone, then serve the folder</span>
+git clone https://github.com/drsamonline/MATERIA-MEDICA-BUILDER.git
+cd MATERIA-MEDICA-BUILDER
+python3 -m http.server 8080
+<span class="c"># open http://localhost:8080</span></div>
+          <p style="margin-top:14px;font-size:14px;color:var(--muted)">Deploy anywhere static — GitHub Pages, Netlify, Cloudflare Pages.</p>
+        </div>
+        <div>
+          <h3 style="font-size:15px;margin-bottom:12px">Install it as an app</h3>
+          <ul class="list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Chrome / Edge:</b> click the install icon in the address bar.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>iOS Safari:</b> Share → <em>Add to Home Screen</em>.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>It then runs fully offline, and a short guided tour runs the first time you open it.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Export a JSON backup regularly — clearing your browser data erases the project.</span></li>
+          </ul>
+          <div class="cta-row" style="margin-top:20px">
+            <a class="btn btn-primary" href="play/">Open the app</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">Questions, answered</h2>
+
+      <div class="faq">
+        <details class="q">
+          <summary>Does my data ever leave my device?</summary>
+          <div class="a">No. Everything is stored locally in your browser using <code>IndexedDB</code>. There is no authentication, no cloud, no analytics, and no external requests after load. Your remedies, symptoms, rubrics, cases and any book you compile belong to you.</div>
+        </details>
+        <details class="q">
+          <summary>Do I need an account or an internet connection?</summary>
+          <div class="a">Neither. It is a single self-contained Progressive Web App with no server and no CDN — once loaded (or installed) it works fully offline.</div>
+        </details>
+        <details class="q">
+          <summary>What can I export?</summary>
+          <div class="a">JSON full backup, JSON in the OMM reader-app schema (v1.1), CSV (a zip of all datasets or one at a time), Excel <code>.xlsx</code>, a printable PDF book with your author block and copyright, self-contained HTML, portable SQL, and a real SQLite <code>.sqlite</code> database file.</div>
+        </details>
+        <details class="q">
+          <summary>Can I move my project to another device?</summary>
+          <div class="a">Yes — export a JSON backup here and import it on the other device. Import accepts a full JSON backup, an OMM repertory or materia-medica file, or CSV, in either Merge or Replace mode.</div>
+        </details>
+        <details class="q">
+          <summary>Can I use my own grading scale?</summary>
+          <div class="a">Yes. Four schemes ship in (Kent 3-point, 4-point with capitals, Boenninghausen 5-point, Simple 0–2), and you can press <em>New scheme</em> to define any number of levels, each with a label and a style — plain, italic, bold, bold-italic, capitals or superscript. Every export renders the grades accordingly.</div>
+        </details>
+        <details class="q">
+          <summary>Does it work with the OMM reader app?</summary>
+          <div class="a">Yes. The JSON exports use the same envelope the reader app reads — <code>schema_version: "1.1"</code>, <code>type: "repertory"</code> or <code>"materia_medica"</code>, a <code>book</code> provenance block, and <code>sections → rubrics → remedy_table</code> / <code>remedies → symptoms</code>. A repertory built here drops straight into that collection, and a book extracted by the OMM pipeline can be imported here for editing.</div>
+        </details>
+        <details class="q">
+          <summary>Is it really free?</summary>
+          <div class="a">Yes — it is released under a <b>Free Use Licence (Attribution Required)</b>, © 2026 Dr Sohil Momin. You may use, copy, modify, merge, publish, distribute, sublicense and/or sell copies, provided the copyright notice and licence are included and any use clearly credits the author with a link to <a href="https://github.com/drsamonline" target="_blank" rel="noopener">github.com/drsamonline</a>. The full text is in the repository's LICENSE file.</div>
+        </details>
+        <details class="q">
+          <summary>I upgraded from v1 — will my data survive?</summary>
+          <div class="a">Yes. The app opens the same <code>MateriaMedicaDB</code> database at version 2 and adds the new stores; existing remedies, symptoms and cases are preserved and old symptom fields are migrated automatically.</div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="fcol">
+        <b>Materia Medica Builder</b>
+        <span>Build your own materia medica and repertory — offline, private, and yours to export.</span>
+        <span class="mono" style="font-size:12px">Free Use Licence · Attribution Required</span>
+      </div>
+      <div class="fcol">
+        <b>Repository</b>
+        <div class="foot-links">
+          <a href="https://github.com/drsamonline/MATERIA-MEDICA-BUILDER" target="_blank" rel="noopener">Source on GitHub</a>
+          <a href="https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/blob/main/README.md" target="_blank" rel="noopener">README</a>
+          <a href="https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/blob/main/LICENSE" target="_blank" rel="noopener">Licence</a>
+        </div>
+      </div>
+      <div class="fcol">
+        <b>App</b>
+        <div class="foot-links">
+          <a href="play/">Live demo</a>
+          <a href="https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/issues" target="_blank" rel="noopener">Issues</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Built by <b>Dr. Sohil Momin</b> <span class="heart" aria-hidden="true">·</span> BHMS — homeopathic physician</span>
+      <span class="mono" style="font-size:12px">No tracking · No server · Your data stays yours</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("js");
+
+  /* mobile nav */
+  var t = document.getElementById("navToggle"), links = document.getElementById("navLinks");
+  if (t && links) {
+    t.addEventListener("click", function () {
+      var open = links.classList.toggle("open");
+      t.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    links.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") { links.classList.remove("open"); t.setAttribute("aria-expanded", "false"); }
+    });
+  }
+
+  /* scroll reveal */
+  var items = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  Array.prototype.forEach.call(items, function (el, i) {
+    el.style.transitionDelay = Math.min(i % 6, 5) * 55 + "ms";
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

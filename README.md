@@ -4,8 +4,9 @@
 
 **Build your own materia medica and repertory — offline, private, and yours to export.**
 
-[![Live app](https://img.shields.io/badge/%E2%96%B6%20Live%20app-Open-0e9384)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
-[![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
+[![Landing page](https://img.shields.io/badge/landing%20page-visit-4338ca)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
+[![Live demo](https://img.shields.io/badge/%E2%96%B6%20live%20demo-open-0e9384)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/)
+[![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/)
 
 ![Offline--first](https://img.shields.io/badge/offline--first-0e9384)
 ![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
