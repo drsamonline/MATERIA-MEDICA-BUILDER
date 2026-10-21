@@ -25,6 +25,18 @@ export const MAKER = {
   blurb: "Built so that any practitioner — or any individual studying on their own — can assemble a personal materia medica and repertory by hand, keep it entirely private, and publish or back it up in whatever form they need.",
 };
 
+export const DEDICATION = {
+  title: "Dedication",
+  lead: "To the homeopaths of the past, the present and the future.",
+  paragraphs: [
+    "To those of the past \u2014 who sat with the sick through long nights and wrote down what they saw, symptom by symptom and remedy by remedy, so that what they learned would not be lost.",
+    "To those of the present \u2014 who still take the whole case: the body, the mind, and the life around it; who keep this craft alive in a hurried world, and who teach it to whoever asks.",
+    "To those of the future \u2014 who will inherit whatever we choose to record, and who will add their own careful observations to the record.",
+    "And to anyone studying alone, with no teacher at hand and no one to compare notes with \u2014 may this make the work a little lighter.",
+  ],
+  signoff: "Dr Sohil Momin",
+};
+
 export const LICENCE = {
   name: "Free Use Licence (Attribution Required)",
   year: 2026,
