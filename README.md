@@ -47,7 +47,7 @@ A single, self-contained Progressive Web App: no server, no account, no tracking
 
 ## 🚀 Try it
 
-**Live app → https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/**
+**Live app → https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/**
 
 Open it in any modern browser, or install it (Chrome/Edge → install icon; iOS Safari → Share → *Add to Home Screen*) and it runs fully offline. A short guided tour runs the first time you open it, and can be replayed any time from the **Help** tab.
 
