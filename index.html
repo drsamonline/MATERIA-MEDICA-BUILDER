@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Materia Medica Builder</title>
-<meta name="description" content="Build your own materia medica and repertory — offline, private, and yours to export in any format.">
-<meta name="theme-color" content="#0d9488">
+<meta name="description" content="Build your own materia medica and repertory — offline, private, and yours to export as JSON, CSV, Excel, PDF, HTML, SQL or SQLite.">
+<meta name="theme-color" content="#0e9384">
 <meta name="color-scheme" content="light dark">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -17,28 +17,45 @@
 <header class="top">
   <div class="wrap head-inner">
     <div class="brand">
-      <img src="icons/icon-192.svg" alt="" width="40" height="40" class="logo">
+      <img src="icons/icon-192.svg" alt="" width="46" height="46" class="logo">
       <div>
         <h1 id="app-title">Materia Medica Builder</h1>
         <p class="sub" id="app-sub">Your own materia medica &amp; repertory — offline, private, exportable.</p>
       </div>
     </div>
     <div class="head-right">
-      <span class="author-chip" id="author-chip" title="Author / book details"></span>
-      <button class="btn ghost" id="theme-btn" type="button" aria-label="Switch colour theme">Theme</button>
+      <button class="author-chip" id="author-chip" type="button" data-goto="author" title="Set your author / book details"></button>
+      <button class="btn ghost" id="theme-btn" type="button" aria-label="Switch colour theme">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Theme
+      </button>
     </div>
   </div>
 </header>
 
 <nav class="tabs" role="tablist">
   <div class="wrap tabs-inner">
-    <button class="tab" data-tab="dashboard" role="tab">Dashboard</button>
-    <button class="tab" data-tab="mm" role="tab">Materia Medica</button>
-    <button class="tab" data-tab="rep" role="tab">Repertory</button>
-    <button class="tab" data-tab="cases" role="tab">Cases</button>
-    <button class="tab" data-tab="marking" role="tab">Marking</button>
-    <button class="tab" data-tab="author" role="tab">Author</button>
-    <button class="tab" data-tab="data" role="tab">Data</button>
+    <button class="tab" data-tab="dashboard" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      Dashboard</button>
+    <button class="tab" data-tab="mm" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg>
+      Materia Medica</button>
+    <button class="tab" data-tab="rep" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+      Repertory</button>
+    <button class="tab" data-tab="cases" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></svg>
+      Cases</button>
+    <button class="tab" data-tab="marking" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7L6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3Z"/></svg>
+      Marking</button>
+    <button class="tab" data-tab="author" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Author</button>
+    <button class="tab" data-tab="data" role="tab">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+      Data</button>
   </div>
 </nav>
 
@@ -46,14 +63,32 @@
 
   <!-- ================= DASHBOARD ================= -->
   <section class="panel" id="tab-dashboard" role="tabpanel">
+    <div class="hero">
+      <h2 id="hero-title">Build your own materia medica</h2>
+      <p>Everything you write stays on this device. Shape your own remedies, rubrics and grading scale, then export the finished book as JSON, CSV, Excel, PDF, HTML, SQL or SQLite.</p>
+      <div class="quick">
+        <button class="btn" data-goto="mm">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Add a remedy</button>
+        <button class="btn" data-goto="rep">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Build a rubric</button>
+        <button class="btn" data-goto="marking">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7L6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3Z"/></svg>
+          Set your scale</button>
+        <button class="btn" data-goto="data">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Export your book</button>
+      </div>
+    </div>
     <div class="stats" id="dash-stats"></div>
     <div class="card-block">
       <h2>How this works</h2>
-      <p class="muted">Add your own remedies in <b>Materia Medica</b>, group symptoms into chapters and rubrics in the <b>Repertory</b>, define your <b>Marking</b> scale, set your <b>Author</b> details, then export from <b>Data</b> as JSON, CSV, Excel, PDF, HTML, SQL or SQLite. Everything is stored only in this browser.</p>
+      <p class="muted">Add remedies in <b>Materia Medica</b>, group symptoms into chapters and rubrics in the <b>Repertory</b>, define your <b>Marking</b> scale, set your <b>Author</b> details, then export from <b>Data</b>. Everything is stored only in this browser.</p>
     </div>
     <div class="card-block">
       <h2>Recent cases</h2>
-      <div id="dash-cases" class="table-scroll"></div>
+      <div id="dash-cases"></div>
     </div>
   </section>
 
@@ -62,7 +97,9 @@
     <div class="toolbar">
       <input id="rem-search" type="search" placeholder="Search remedies…" autocomplete="off">
       <span class="spacer"></span>
-      <button class="btn primary" id="rem-new" type="button">+ New remedy</button>
+      <button class="btn primary" id="rem-new" type="button">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        New remedy</button>
     </div>
     <div class="split">
       <div class="list-col"><div id="rem-list" class="list"></div></div>
@@ -75,11 +112,13 @@
     <div class="toolbar">
       <label class="lbl" for="sec-select">Chapter</label>
       <select id="sec-select"></select>
-      <button class="btn" id="sec-new" type="button">+ Chapter</button>
-      <button class="btn" id="sec-rename" type="button">Rename</button>
-      <button class="btn danger" id="sec-del" type="button">Delete</button>
+      <button class="btn small" id="sec-new" type="button">+ Chapter</button>
+      <button class="btn small" id="sec-rename" type="button">Rename</button>
+      <button class="btn danger small" id="sec-del" type="button">Delete</button>
       <span class="spacer"></span>
-      <button class="btn primary" id="rub-new" type="button">+ New rubric</button>
+      <button class="btn primary" id="rub-new" type="button">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        New rubric</button>
     </div>
     <p class="muted small">A rubric is a symptom heading (e.g. <i>Anxiety, about health</i>) carrying graded remedies. Grades use your active <b>Marking</b> scheme.</p>
     <div id="rub-list" class="rub-list"></div>
@@ -123,20 +162,20 @@
           <option>No Change</option><option>Aggravated</option><option>Suppressed</option>
         </select>
       </div>
-      <div id="case-list" class="table-scroll"></div>
+      <div id="case-list"></div>
     </div>
   </section>
 
   <!-- ================= MARKING ================= -->
   <section class="panel" id="tab-marking" role="tabpanel" hidden>
-    <p class="muted">Define the scale you mark remedies with. Pick one scheme as active; rubrics use it everywhere. Ship-in presets can be edited, and you can add your own scheme.</p>
+    <p class="muted">Define the scale you mark remedies with. Pick one scheme as active; rubrics use it everywhere. The presets can be edited, and you can add your own scheme.</p>
     <div id="marking-root"></div>
     <button class="btn primary" id="scheme-new" type="button">+ New scheme</button>
   </section>
 
   <!-- ================= AUTHOR ================= -->
   <section class="panel" id="tab-author" role="tabpanel" hidden>
-    <p class="muted">These details are stamped into every PDF, HTML and workbook you export, so your book carries your name and copyright.</p>
+    <p class="muted">These details are stamped into every PDF, HTML file and workbook you export, so your book carries your name and copyright.</p>
     <form id="author-form" class="form-grid">
       <label>Book title<input id="a-book_title" placeholder="My Materia Medica"></label>
       <label>Edition / volume<input id="a-edition" placeholder="First edition"></label>
