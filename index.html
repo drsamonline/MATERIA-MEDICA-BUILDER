@@ -1,141 +1,234 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Materia Medica Builder - Personal research tool for homeopathic practitioners">
-    <meta name="theme-color" content="#0d9488">
-    <title>Materia Medica Builder</title>
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
-    
-    <!-- Tailwind CSS (CDN for offline-first, can be downloaded) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
-                        },
-                        secondary: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            200: '#c7d2fe',
-                            300: '#a5b4fc',
-                            400: '#818cf8',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            800: '#3730a3',
-                            900: '#312e81',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Chart.js for analytics -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materia Medica Builder</title>
+<meta name="description" content="Build your own materia medica and repertory — offline, private, and yours to export in any format.">
+<meta name="theme-color" content="#0d9488">
+<meta name="color-scheme" content="light dark">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-200">
-    <div id="app" class="min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="bg-primary-600 dark:bg-primary-800 text-white shadow-lg sticky top-0 z-50">
-            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                    </svg>
-                    <h1 class="text-xl font-bold">Materia Medica Builder</h1>
-                </div>
-                <button id="themeToggle" class="p-2 rounded-lg hover:bg-primary-700 dark:hover:bg-primary-700 transition-colors" aria-label="Toggle dark mode">
-                    <svg id="sunIcon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                    <svg id="moonIcon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                </button>
-            </div>
-        </header>
+<body>
 
-        <!-- Main Content -->
-        <main class="flex-1 container mx-auto px-4 py-6 pb-24 md:pb-6">
-            <nav id="desktopNav" class="hidden md:flex gap-2 mb-6 overflow-x-auto">
-                <button data-page="dashboard" class="nav-btn active px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors whitespace-nowrap">Dashboard</button>
-                <button data-page="remedies" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Remedies Library</button>
-                <button data-page="cases" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Case Logger</button>
-                <button data-page="settings" class="nav-btn px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-primary-600 hover:text-white transition-colors whitespace-nowrap">Settings</button>
-            </nav>
+<header class="top">
+  <div class="wrap head-inner">
+    <div class="brand">
+      <img src="icons/icon-192.svg" alt="" width="40" height="40" class="logo">
+      <div>
+        <h1 id="app-title">Materia Medica Builder</h1>
+        <p class="sub" id="app-sub">Your own materia medica &amp; repertory — offline, private, exportable.</p>
+      </div>
+    </div>
+    <div class="head-right">
+      <span class="author-chip" id="author-chip" title="Author / book details"></span>
+      <button class="btn ghost" id="theme-btn" type="button" aria-label="Switch colour theme">Theme</button>
+    </div>
+  </div>
+</header>
 
-            <div id="content" class="page-content">
-                <!-- Dynamic content loaded here -->
-            </div>
-        </main>
+<nav class="tabs" role="tablist">
+  <div class="wrap tabs-inner">
+    <button class="tab" data-tab="dashboard" role="tab">Dashboard</button>
+    <button class="tab" data-tab="mm" role="tab">Materia Medica</button>
+    <button class="tab" data-tab="rep" role="tab">Repertory</button>
+    <button class="tab" data-tab="cases" role="tab">Cases</button>
+    <button class="tab" data-tab="marking" role="tab">Marking</button>
+    <button class="tab" data-tab="author" role="tab">Author</button>
+    <button class="tab" data-tab="data" role="tab">Data</button>
+  </div>
+</nav>
 
-        <!-- Mobile Bottom Navigation -->
-        <nav id="mobileNav" class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 shadow-lg z-50">
-            <div class="flex justify-around py-2">
-                <button data-page="dashboard" class="mobile-nav-btn active flex flex-col items-center p-2 text-primary-600 dark:text-primary-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                    </svg>
-                    <span class="text-xs mt-1">Dashboard</span>
-                </button>
-                <button data-page="remedies" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                    </svg>
-                    <span class="text-xs mt-1">Remedies</span>
-                </button>
-                <button data-page="cases" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                    </svg>
-                    <span class="text-xs mt-1">Cases</span>
-                </button>
-                <button data-page="settings" class="mobile-nav-btn flex flex-col items-center p-2 text-slate-500 dark:text-slate-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    <span class="text-xs mt-1">Settings</span>
-                </button>
-            </div>
-        </nav>
+<main class="wrap">
 
-        <!-- Toast Notification -->
-        <div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
-            <span id="toastMessage">Success!</span>
+  <!-- ================= DASHBOARD ================= -->
+  <section class="panel" id="tab-dashboard" role="tabpanel">
+    <div class="stats" id="dash-stats"></div>
+    <div class="card-block">
+      <h2>How this works</h2>
+      <p class="muted">Add your own remedies in <b>Materia Medica</b>, group symptoms into chapters and rubrics in the <b>Repertory</b>, define your <b>Marking</b> scale, set your <b>Author</b> details, then export from <b>Data</b> as JSON, CSV, Excel, PDF, HTML, SQL or SQLite. Everything is stored only in this browser.</p>
+    </div>
+    <div class="card-block">
+      <h2>Recent cases</h2>
+      <div id="dash-cases" class="table-scroll"></div>
+    </div>
+  </section>
+
+  <!-- ================= MATERIA MEDICA ================= -->
+  <section class="panel" id="tab-mm" role="tabpanel" hidden>
+    <div class="toolbar">
+      <input id="rem-search" type="search" placeholder="Search remedies…" autocomplete="off">
+      <span class="spacer"></span>
+      <button class="btn primary" id="rem-new" type="button">+ New remedy</button>
+    </div>
+    <div class="split">
+      <div class="list-col"><div id="rem-list" class="list"></div></div>
+      <div class="detail-col"><div id="rem-detail" class="detail"></div></div>
+    </div>
+  </section>
+
+  <!-- ================= REPERTORY ================= -->
+  <section class="panel" id="tab-rep" role="tabpanel" hidden>
+    <div class="toolbar">
+      <label class="lbl" for="sec-select">Chapter</label>
+      <select id="sec-select"></select>
+      <button class="btn" id="sec-new" type="button">+ Chapter</button>
+      <button class="btn" id="sec-rename" type="button">Rename</button>
+      <button class="btn danger" id="sec-del" type="button">Delete</button>
+      <span class="spacer"></span>
+      <button class="btn primary" id="rub-new" type="button">+ New rubric</button>
+    </div>
+    <p class="muted small">A rubric is a symptom heading (e.g. <i>Anxiety, about health</i>) carrying graded remedies. Grades use your active <b>Marking</b> scheme.</p>
+    <div id="rub-list" class="rub-list"></div>
+  </section>
+
+  <!-- ================= CASES ================= -->
+  <section class="panel" id="tab-cases" role="tabpanel" hidden>
+    <div class="card-block">
+      <h2 id="case-form-title">Log a case</h2>
+      <form id="case-form" class="form-grid">
+        <input type="hidden" id="case-id">
+        <label>Initials<input id="case-initials" maxlength="12" placeholder="A.B."></label>
+        <label>Age<input id="case-age" type="number" min="0" max="130"></label>
+        <label>Gender
+          <select id="case-gender"><option value="">—</option><option>M</option><option>F</option><option>O</option></select>
+        </label>
+        <label>Remedy<select id="case-remedy"></select></label>
+        <label>Potency<input id="case-potency" placeholder="30C"></label>
+        <label>Dosage<input id="case-dosage" placeholder="BD × 5 days"></label>
+        <label>Outcome
+          <select id="case-outcome">
+            <option value="">—</option><option>Cured</option><option>Improved</option>
+            <option>No Change</option><option>Aggravated</option><option>Suppressed</option>
+          </select>
+        </label>
+        <label>Date<input id="case-date" type="date"></label>
+        <label class="full">Chief complaint<textarea id="case-complaint" rows="2"></textarea></label>
+        <label class="full">Follow-up notes<textarea id="case-notes" rows="2"></textarea></label>
+        <div class="full actions">
+          <button class="btn primary" type="submit">Save case</button>
+          <button class="btn" type="button" id="case-reset">Clear</button>
         </div>
+      </form>
+    </div>
+    <div class="card-block">
+      <div class="toolbar">
+        <h2 style="margin:0">Case history</h2>
+        <span class="spacer"></span>
+        <select id="case-filter">
+          <option value="">All outcomes</option><option>Cured</option><option>Improved</option>
+          <option>No Change</option><option>Aggravated</option><option>Suppressed</option>
+        </select>
+      </div>
+      <div id="case-list" class="table-scroll"></div>
+    </div>
+  </section>
+
+  <!-- ================= MARKING ================= -->
+  <section class="panel" id="tab-marking" role="tabpanel" hidden>
+    <p class="muted">Define the scale you mark remedies with. Pick one scheme as active; rubrics use it everywhere. Ship-in presets can be edited, and you can add your own scheme.</p>
+    <div id="marking-root"></div>
+    <button class="btn primary" id="scheme-new" type="button">+ New scheme</button>
+  </section>
+
+  <!-- ================= AUTHOR ================= -->
+  <section class="panel" id="tab-author" role="tabpanel" hidden>
+    <p class="muted">These details are stamped into every PDF, HTML and workbook you export, so your book carries your name and copyright.</p>
+    <form id="author-form" class="form-grid">
+      <label>Book title<input id="a-book_title" placeholder="My Materia Medica"></label>
+      <label>Edition / volume<input id="a-edition" placeholder="First edition"></label>
+      <label>Year<input id="a-year" type="number" min="1500" max="2200"></label>
+      <label>Author name<input id="a-name" placeholder="Dr …"></label>
+      <label>Credentials<input id="a-credentials" placeholder="BHMS"></label>
+      <label>Clinic / practice<input id="a-clinic"></label>
+      <label>Email<input id="a-email" type="email"></label>
+      <label>Website<input id="a-website" placeholder="https://"></label>
+      <label class="full">Copyright line<textarea id="a-copyright" rows="2" placeholder="© 2026 Dr … All rights reserved."></textarea></label>
+      <label class="full">Licence<textarea id="a-license" rows="2"></textarea></label>
+      <div class="full actions"><button class="btn primary" type="submit">Save details</button></div>
+    </form>
+  </section>
+
+  <!-- ================= DATA ================= -->
+  <section class="panel" id="tab-data" role="tabpanel" hidden>
+    <div class="card-block">
+      <h2>Export</h2>
+      <div class="form-grid">
+        <label class="full">Format
+          <select id="exp-format">
+            <option value="json-native">JSON — full backup (this app)</option>
+            <option value="json-omm-rep">JSON — OMM repertory (reader app)</option>
+            <option value="json-omm-mm">JSON — OMM materia medica (reader app)</option>
+            <option value="json-omm-both">JSON — OMM repertory + materia medica (zip)</option>
+            <option value="csv-bundle">CSV — all datasets (zip)</option>
+            <option value="csv-one">CSV — single dataset…</option>
+            <option value="xlsx">Excel workbook (.xlsx)</option>
+            <option value="pdf">PDF document</option>
+            <option value="html">HTML document (viewable)</option>
+            <option value="sql">SQL dump (.sql)</option>
+            <option value="sqlite">SQLite database (.sqlite)</option>
+          </select>
+        </label>
+        <label id="csv-one-wrap" hidden>CSV dataset
+          <select id="exp-csv-set">
+            <option value="remedies">Remedies</option><option value="symptoms">Symptoms</option>
+            <option value="repertory">Repertory</option><option value="cases">Cases</option>
+          </select>
+        </label>
+        <label id="scope-wrap" hidden class="full">Include
+          <span class="inline-checks">
+            <label class="check"><input type="checkbox" id="scope-mm" checked> Materia medica</label>
+            <label class="check"><input type="checkbox" id="scope-rep" checked> Repertory</label>
+          </span>
+        </label>
+        <div class="full actions"><button class="btn primary" id="export-btn" type="button">Export</button></div>
+      </div>
+      <p class="muted small" id="exp-note"></p>
     </div>
 
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Service Worker registered:', reg.scope))
-                .catch(err => console.error('Service Worker registration failed:', err));
-        }
-    </script>
-    
-    <script src="js/app.js" type="module"></script>
+    <div class="card-block">
+      <h2>Import</h2>
+      <p class="muted small">JSON: a full backup, or an OMM repertory/materia-medica file. CSV: choose the dataset the file represents.</p>
+      <div class="form-grid">
+        <label>File type
+          <select id="imp-type">
+            <option value="json">JSON (auto-detect)</option>
+            <option value="csv-remedies">CSV — remedies</option>
+            <option value="csv-symptoms">CSV — symptoms</option>
+            <option value="csv-repertory">CSV — repertory</option>
+            <option value="csv-cases">CSV — cases</option>
+          </select>
+        </label>
+        <label>Mode
+          <select id="imp-mode">
+            <option value="merge">Merge (keep existing, add)</option>
+            <option value="replace">Replace all data</option>
+          </select>
+        </label>
+        <label class="full">File<input id="imp-file" type="file" accept=".json,.csv,text/csv,application/json"></label>
+        <div class="full actions"><button class="btn primary" id="import-btn" type="button">Import</button></div>
+      </div>
+    </div>
+
+    <div class="card-block danger-block">
+      <h2>Reset</h2>
+      <p class="muted small">Permanently delete all remedies, symptoms, repertory, cases and settings from this browser. Export a backup first.</p>
+      <button class="btn danger" id="clear-btn" type="button">Erase all data</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <span id="foot-author"></span>
+  <span class="muted small">Stored locally in your browser. Nothing is uploaded.</span>
+</footer>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/app.js" type="module"></script>
 </body>
 </html>
