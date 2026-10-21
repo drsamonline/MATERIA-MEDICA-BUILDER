@@ -279,6 +279,19 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 5%, transparent)}
 .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
 .tagline{font-family:var(--serif);font-style:italic;color:var(--dim)}
 
+
+/* ---------- diagrams + dedication ---------- */
+.diagram{margin:6px 0 22px;padding:0;border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;background:var(--panel-2)}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption{padding:9px 15px;font-size:.78rem;color:var(--dim);border-top:1px solid var(--border-2);background:var(--panel)}
+.dedication{background:linear-gradient(180deg,var(--accent-soft),transparent 70%);
+  border-color:color-mix(in srgb,var(--accent) 25%, var(--border))}
+.dedication h2{font-family:var(--serif);font-size:1.4rem;font-weight:600;margin-bottom:6px}
+.ded-lead{font-family:var(--serif);font-style:italic;font-size:1.06rem;color:var(--text);margin:0 0 14px}
+.dedication p{max-width:74ch}
+.ded-sign{font-family:var(--serif);font-style:italic;text-align:right;color:var(--dim);margin-top:16px}
+
 /* ---------- footer ---------- */
 .foot{margin-top:26px;border-top:1px solid var(--border);background:var(--panel)}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:22px 20px}
