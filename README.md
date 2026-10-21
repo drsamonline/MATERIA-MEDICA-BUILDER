@@ -18,7 +18,25 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER)
 ![GitHub stars](https://img.shields.io/github/stars/drsamonline/MATERIA-MEDICA-BUILDER)
 
+<img src="docs/screenshots/dashboard.jpg" alt="Materia Medica Builder — dashboard" width="860">
+
 </div>
+
+---
+
+## 🕯️ Dedication
+
+> **To the homeopaths of the past, the present and the future.**
+>
+> To those of the **past** — who sat with the sick through long nights and wrote down what they saw, symptom by symptom and remedy by remedy, so that what they learned would not be lost.
+>
+> To those of the **present** — who still take the whole case: the body, the mind, and the life around it; who keep this craft alive in a hurried world, and who teach it to whoever asks.
+>
+> To those of the **future** — who will inherit whatever we choose to record, and who will add their own careful observations to the record.
+>
+> And to anyone studying alone, with no teacher at hand and no one to compare notes with — may this make the work a little lighter.
+>
+> — *Dr Sohil Momin*
 
 ---
 
@@ -34,19 +52,56 @@ Open it in any modern browser, or install it (Chrome/Edge → install icon; iOS 
 
 ---
 
+## 📸 A look around
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/screenshots/materia-medica.jpg" alt="Materia Medica"><br><sub><b>Materia Medica</b> — remedies, symptoms, chapters and grades</sub></td>
+<td align="center" width="50%"><img src="docs/screenshots/repertory.jpg" alt="Repertory"><br><sub><b>Repertory</b> — rubrics carrying graded remedies</sub></td>
+</tr>
+<tr>
+<td align="center" width="50%"><img src="docs/screenshots/marking.jpg" alt="Marking"><br><sub><b>Marking</b> — your own grading scale</sub></td>
+<td align="center" width="50%"><img src="docs/screenshots/data.jpg" alt="Data"><br><sub><b>Data</b> — export and import in eight formats</sub></td>
+</tr>
+<tr>
+<td align="center" width="50%"><img src="docs/screenshots/help.jpg" alt="Help"><br><sub><b>Help</b> — the full guide, built in</sub></td>
+<td align="center" width="50%"><img src="docs/screenshots/about.jpg" alt="About"><br><sub><b>About</b> — dedication, maker and licence</sub></td>
+</tr>
+<tr>
+<td align="center" width="50%"><img src="docs/screenshots/tour-welcome.jpg" alt="Guided tour"><br><sub><b>First-run tour</b> — a guided walk through the app</sub></td>
+<td align="center" width="50%"><img src="docs/screenshots/dark-dashboard.jpg" alt="Dark mode"><br><sub><b>Dark mode</b> — light, dark or follow the system</sub></td>
+</tr>
+</table>
+
+---
+
+## 🧭 How it fits together
+
+<img src="docs/workflow.svg" alt="Materia Medica and Repertory feed the exporter" width="900">
+
+---
+
 ## ✨ What it does
 
 | Area | What you get |
 |---|---|
 | **Materia Medica** | Remedies with name, abbreviation, common name, kingdom, family, source and notes. Add any number of symptoms to each, each with a chapter, grade and modalities. |
 | **Repertory** | Chapters (Mind, Head, Stomach…) → rubrics → graded remedies. Rubrics support a parent heading and a note. |
-| **Marking system** | Define the grading scale yourself. Four presets ship in (Kent 3-point, 4-point with capitals, Boenninghausen 5-point, Simple 0–2) and you can edit any of them or add your own schemes with custom levels, labels and styles (plain / italic / bold / bold-italic / caps / superscript). |
+| **Marking system** | Define the grading scale yourself. Four presets ship in, and you can edit any of them or add your own schemes. |
 | **Author & branding** | Your name, credentials, clinic, email, website, book title, edition, year, copyright line and licence — stamped into every PDF, HTML file and workbook you export. |
 | **Cases** | A private case logger: log a case, track the outcome (Cured / Improved / No Change / Aggravated / Suppressed) and review the history. |
 | **Help** | The full how-to guide lives inside the app, plus a first-run tour and print-to-PDF. |
-| **About** | The app, its maker, and the licence it is released under. |
+| **About** | The dedication, the maker, and the licence it is released under. |
 
 Everything is stored **locally in your browser** (IndexedDB). Nothing is uploaded anywhere.
+
+---
+
+## 🎚️ Your marking scale
+
+<img src="docs/marking-scale.svg" alt="Four gradations, each with its own typographic style" width="760">
+
+Four schemes ship in — **Kent 3-point**, **4-point with capitals**, **Boenninghausen 5-point** and a **Simple 0–2** — or press *New scheme* and define your own: any number of levels, each with a label and a style (plain / italic / bold / bold-italic / capitals / superscript). Rubrics everywhere use the active scheme, and every export renders the grades accordingly.
 
 ---
 
@@ -63,9 +118,7 @@ The same guide is built into the app — open the **Help** tab, or press **Take 
 5. Inside a rubric, type a remedy abbreviation and press Enter to attach it, then choose its grade.
 6. Fill in your **Author** details, then go to **Data** and export your book.
 
-**Building the repertory.** A rubric is a symptom heading such as *Anxiety, about health*. It may also have a parent heading (so *Morning* under *Sweat of the feet* reads as *Sweat of the feet, Morning*) and a note. To attach a remedy, type its abbreviation into the **+ remedy** box inside the rubric and press Enter.
-
-**Your marking scale.** Pick one scheme as active, edit any of them, or press **New scheme** to define your own — any number of levels, each with a label and a style. Rubrics everywhere use the active scheme, and every export renders the grades accordingly.
+**Building the repertory.** A rubric is a symptom heading such as *Anxiety, about health*. It may also have a parent heading (so *Morning* under *Sweat of the feet* reads as *Sweat of the feet, Morning*) and a note.
 
 **Backups.** Your work lives only in this browser. Export a JSON backup regularly, and import it on another device to carry your project across.
 
@@ -85,6 +138,12 @@ The same guide is built into the app — open the **Help** tab, or press **Take 
 | **SQLite (.sqlite)** | A real database file (`meta`, `remedy`, `symptom`, `rubric`, `remedy_link`, `case_log`). |
 
 **Import** accepts a full JSON backup, an OMM repertory or materia-medica file, or CSV — with **Merge** or **Replace** mode.
+
+---
+
+## 🔧 Under the hood
+
+<img src="docs/architecture.svg" alt="A browser-only app: modules write files directly, nothing leaves the device" width="900">
 
 All writers are dependency-free and run entirely in the browser: the `.xlsx`, `.pdf` and `.sqlite` files are generated byte-by-byte in JavaScript, so the app never needs a network connection or a library from a CDN.
 
@@ -134,8 +193,13 @@ js/db.js              IndexedDB layer, marking schemes, migration, starter data
 js/builders.js        turn stored data into export documents
 js/importers.js       parse native/OMM JSON and CSV
 js/exporters.js       the dependency-free XLSX / PDF / SQLite / CSV / SQL / HTML writers
-js/docs.js            the in-app Help guide, maker details and licence text
+js/docs.js            the in-app Help guide, dedication, maker details and licence
+js/diagrams.js        inline SVG artwork used inside the app
 js/tour.js            the first-run spotlight tour
+docs/workflow.svg     diagram — how the pieces fit together
+docs/architecture.svg diagram — browser-only architecture
+docs/marking-scale.svg diagram — the grading scale
+docs/screenshots/     the screenshots used above
 sw.js                 offline service worker
 manifest.json         PWA manifest
 icons/                app icons
@@ -154,7 +218,7 @@ Built so that any practitioner — or anyone studying on their own — can assem
 - Email: [sohilmomin2000@gmail.com](mailto:sohilmomin2000@gmail.com)
 - Web: [drsamonline.github.io](https://drsamonline.github.io/)
 
-The same details appear in the app's **About** tab.
+The same details appear in the app's **About** tab, together with the dedication above.
 
 ---
 
