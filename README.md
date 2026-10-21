@@ -1,12 +1,39 @@
-# Materia Medica Builder
+<div align="center">
 
-Build **your own** materia medica and repertory — offline, private, and yours to export in any format. A single, self-contained Progressive Web App: no server, no account, no tracking, no CDN.
+# 🌿 Materia Medica Builder
 
-> **Vision:** help any individual practitioner assemble a personal materia medica and repertory — every remedy, symptom, rubric and grade defined and edited by hand — then publish or back it up in whatever shape they need.
+**Build your own materia medica and repertory — offline, private, and yours to export.**
+
+[![Live app](https://img.shields.io/badge/%E2%96%B6%20Live%20app-Open-0e9384
+[![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8
+
+![Offline first](https://img.shields.io/badge/offline-first-0e9384
+![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen
+![Vanilla JS](https://img.shields.io/badge/vanilla-JS-f7df1e
+![No tracking](https://img.shields.io/badge/tracking-none-blue
+![Formats](https://img.shields.io/badge/export-JSON%20%7C%20CSV%20%7C%20XLSX%20%7C%20PDF%20%7C%20HTML%20%7C%20SQL%20%7C%20SQLite-important
+
+![GitHub last commit](https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER
+![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER
+![GitHub stars](https://img.shields.io/github/stars/drsamonline/MATERIA-MEDICA-BUILDER
+
+</div>
 
 ---
 
-## What it does
+A single, self-contained Progressive Web App: no server, no account, no tracking, no CDN.
+
+> **Vision:** help any individual practitioner assemble a personal materia medica and repertory — every remedy, symptom, rubric and grade defined and edited by hand — then publish or back it up in whatever shape they need.
+
+## 🚀 Try it
+
+**Live app:** **https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/**
+
+Open it in any modern browser, or install it (Chrome/Edge → install icon; iOS Safari → Share → *Add to Home Screen*) and it runs fully offline.
+
+---
+
+## ✨ What it does
 
 | Area | What you get |
 |---|---|
@@ -21,7 +48,7 @@ Everything is stored **locally in your browser** (IndexedDB). Nothing is uploade
 
 ---
 
-## Export & import
+## 📤 Export & import
 
 **Export** (Data tab):
 
@@ -45,28 +72,23 @@ All writers are **dependency-free** and run entirely in the browser — the `.xl
 
 ---
 
-## Compatibility with the OMM reader app
+## 🔗 Compatibility with the OMM reader app
 
 The JSON exports use the same envelope your reader app already reads (`schema_version: "1.1"`, `type: "repertory"` / `"materia_medica"`, a `book` provenance block, and `sections → rubrics → remedy_table` / `remedies → symptoms`). A repertory you build here can be dropped straight into that collection, and a book extracted by the OMM pipeline can be imported here for editing.
 
 ---
 
-## Using it
+## 🛠️ Running it locally
 
-### Run locally
 ```bash
 python3 -m http.server 8080     # then open http://localhost:8080
 ```
 
-### Install as an app
-Open it in Chrome/Edge (or Safari on iOS), then **Install** / **Add to Home Screen**. It works fully offline afterwards.
-
-### Deploy
-Upload the folder to any static host (GitHub Pages, Netlify, Cloudflare Pages…). The service worker takes it offline automatically.
+Deploy anywhere static — GitHub Pages, Netlify, Cloudflare Pages. The service worker takes it offline automatically.
 
 ---
 
-## Data model
+## 🧱 Data model
 
 ```
 remedy   { id, name, abbrev, common_name, kingdom, family, source, notes }
@@ -84,7 +106,7 @@ settings { author{…}, marking{active, schemes[{id,name,levels[{v,label,style}]
 
 ---
 
-## Files
+## 📁 Files
 
 ```
 index.html            app shell and tabs
@@ -101,11 +123,11 @@ icons/                app icons
 
 ---
 
-## Privacy
+## 🔒 Privacy
 
 - No authentication, no cloud, no analytics, no external requests after load.
 - Clearing your browser data will erase the project — **export a backup regularly.**
 
-## Licence
+## 📄 Licence
 
 Personal tool provided as-is for educational and research purposes. Your data and your book are your own.
