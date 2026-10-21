@@ -5,7 +5,8 @@ import * as DB from "./db.js";
 import * as B from "./builders.js";
 import * as IMP from "./importers.js";
 import { buildXLSX, buildPDF, buildHTML, buildSQLite, buildSQL, buildCSV, zip } from "./exporters.js";
-import { APP, MAKER, LICENCE, HOWTO, FAQ } from "./docs.js";
+import { APP, MAKER, LICENCE, HOWTO, FAQ, DEDICATION } from "./docs.js";
+import { WORKFLOW, ARCHITECTURE, MARKING_SCALE } from "./diagrams.js";
 import { startTour } from "./tour.js";
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -201,7 +202,8 @@ function renderCases() {
 function renderMarking() {
   const root = $("#marking-root");
   const m = S.marking;
-  root.innerHTML = m.schemes.map(sc => `
+  const diagram = `<figure class="diagram">${MARKING_SCALE}</figure>`;
+  root.innerHTML = diagram + m.schemes.map(sc => `
     <div class="scheme${sc.id === m.active ? " active" : ""}" data-scheme="${sc.id}">
       <div class="scheme-head">
         <label class="check"><input type="radio" name="active-scheme" ${sc.id === m.active ? "checked" : ""} data-scheme-active="${sc.id}"> Active</label>
@@ -264,7 +266,11 @@ function docBlock(b) {
 }
 function renderHelp() {
   const faq = FAQ.map(f => `<div class="faq"><b>${esc(f.q)}</b><p>${esc(f.a)}</p></div>`).join("");
-  $("#help-root").innerHTML = HOWTO.map(docBlock).join("") + `<h3>Questions</h3>` + faq;
+  $("#help-root").innerHTML =
+    `<figure class="diagram">${WORKFLOW}<figcaption>How the pieces fit together.</figcaption></figure>`
+    + HOWTO.map(docBlock).join("")
+    + `<h3>Under the hood</h3><figure class="diagram">${ARCHITECTURE}<figcaption>A browser-only app — nothing leaves the device unless you export it.</figcaption></figure>`
+    + `<h3>Questions</h3>` + faq;
 }
 
 /* ---------------- about ---------------- */
@@ -276,6 +282,12 @@ function renderAbout() {
   ].join("");
   const chips = ["Offline-first", "Zero dependencies", "Vanilla JS", "No tracking", "PWA"].map(t => `<span>${esc(t)}</span>`).join("");
   $("#about-root").innerHTML = `
+    <div class="card-block dedication">
+      <h2>${esc(DEDICATION.title)}</h2>
+      <p class="ded-lead">${esc(DEDICATION.lead)}</p>
+      ${DEDICATION.paragraphs.map(t => `<p>${esc(t)}</p>`).join("")}
+      <p class="ded-sign">&mdash; ${esc(DEDICATION.signoff)}</p>
+    </div>
     <div class="card-block">
       <div class="maker">
         <div class="monogram">${esc(MAKER.initials)}</div>
@@ -298,6 +310,10 @@ function renderAbout() {
         <a href="${esc(APP.live)}" target="_blank" rel="noopener">Live app</a>
         <button class="linklike" id="about-tour" type="button">Take the tour</button>
       </div>
+    </div>
+    <div class="card-block">
+      <h2>How it is built</h2>
+      <figure class="diagram">${ARCHITECTURE}</figure>
     </div>
     <div class="card-block">
       <h2>Licence</h2>
