@@ -4,18 +4,18 @@
 
 **Build your own materia medica and repertory — offline, private, and yours to export.**
 
-[![Live app](https://img.shields.io/badge/%E2%96%B6%20Live%20app-Open-0e9384
-[![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8
+[![Live app](https://img.shields.io/badge/%E2%96%B6%20Live%20app-Open-0e9384)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
+[![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
 
-![Offline first](https://img.shields.io/badge/offline-first-0e9384
-![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen
-![Vanilla JS](https://img.shields.io/badge/vanilla-JS-f7df1e
-![No tracking](https://img.shields.io/badge/tracking-none-blue
-![Formats](https://img.shields.io/badge/export-JSON%20%7C%20CSV%20%7C%20XLSX%20%7C%20PDF%20%7C%20HTML%20%7C%20SQL%20%7C%20SQLite-important
+![Offline--first](https://img.shields.io/badge/offline--first-0e9384)
+![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
+![Vanilla JS](https://img.shields.io/badge/vanilla-JS-f7df1e)
+![No tracking](https://img.shields.io/badge/tracking-none-blue)
+![Formats](https://img.shields.io/badge/export-JSON%20CSV%20XLSX%20PDF%20HTML%20SQL%20SQLite-important)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER
-![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER
-![GitHub stars](https://img.shields.io/github/stars/drsamonline/MATERIA-MEDICA-BUILDER
+![GitHub last commit](https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER)
+![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER)
+![GitHub stars](https://img.shields.io/github/stars/drsamonline/MATERIA-MEDICA-BUILDER)
 
 </div>
 
