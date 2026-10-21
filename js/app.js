@@ -11,6 +11,13 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
 const now = () => new Date().toISOString();
 
+const ICON = {
+  leaf: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg>',
+  book: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>',
+  clip: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>',
+};
+function emptyState(text, icon) { return '<div class="empty">' + (icon || "") + '<span>' + esc(text) + "</span></div>"; }
+
 const S = { remedies: [], symptoms: [], sections: [], rubrics: [], cases: [], author: { ...DB.DEFAULT_AUTHOR }, marking: null, tab: "dashboard", remSel: null, secSel: null, remQuery: "" };
 
 /* ---------------- small helpers ---------------- */
@@ -64,6 +71,7 @@ function renderHeader() {
   $("#app-sub").textContent = S.author.name ? (S.author.name + (S.author.credentials ? ", " + S.author.credentials : "")) : "Your own materia medica & repertory — offline, private, exportable.";
   $("#author-chip").textContent = S.author.name || "Set author →";
   $("#foot-author").textContent = S.author.copyright || (S.author.name ? "© " + (S.author.year || new Date().getFullYear()) + " " + S.author.name : "");
+  const ht = $("#hero-title"); if (ht) ht.textContent = S.author.book_title || "Build your own materia medica";
 }
 
 /* ---------------- dashboard ---------------- */
@@ -80,7 +88,7 @@ function renderDashboard() {
     ? `<table><thead><tr><th>Initials</th><th>Remedy</th><th>Outcome</th><th>Date</th></tr></thead><tbody>`
       + recent.map(c => `<tr><td>${esc(c.patient_initials)}</td><td>${esc(remedyName(c.prescribed_remedy_id))}</td><td>${esc(c.outcome)}</td><td>${esc((c.date || "").slice(0, 10))}</td></tr>`).join("")
       + `</tbody></table>`
-    : `<p class="muted">No cases yet.</p>`;
+    : emptyState("No cases yet.", ICON.clip);
 }
 
 /* ---------------- materia medica ---------------- */
@@ -92,13 +100,13 @@ function renderMM() {
     return `<button class="list-item${r.id === S.remSel ? " sel" : ""}" data-rem="${r.id}">
       <span class="li-title">${esc(r.name)}</span>
       <span class="li-sub">${esc(r.abbrev || "")}${r.abbrev ? " · " : ""}${n} symptom${n === 1 ? "" : "s"}</span></button>`;
-  }).join("") : `<p class="muted">No remedies${q ? " match" : " yet — add one"}.</p>`;
+  }).join("") : emptyState(`No remedies${q ? " match" : " yet — add one."}`, ICON.leaf);
   renderRemDetail();
 }
 function renderRemDetail() {
   const r = S.remedies.find(x => x.id === S.remSel);
   const d = $("#rem-detail");
-  if (!r) { d.innerHTML = `<p class="muted">Select a remedy, or add a new one.</p>`; return; }
+  if (!r) { d.innerHTML = emptyState("Select a remedy, or add a new one.", ICON.leaf); return; }
   const syms = S.symptoms.filter(s => s.remedy_id === r.id);
   d.innerHTML = `
     <div class="detail-head">
@@ -136,7 +144,7 @@ function renderRep() {
     : `<option value="">— no chapters —</option>`;
   const sec = S.sections.find(x => x.id === S.secSel);
   const list = $("#rub-list");
-  if (!sec) { list.innerHTML = `<p class="muted">No chapters yet. Add one to begin your repertory.</p>`; return; }
+  if (!sec) { list.innerHTML = emptyState("No chapters yet. Add one to begin your repertory.", ICON.book); return; }
   const rubs = S.rubrics.filter(r => r.section_id === sec.id);
   list.innerHTML = rubs.length ? rubs.map(r => {
     const chips = (r.remedies || []).map((l, i) => `
@@ -157,7 +165,7 @@ function renderRep() {
         <input class="rx-add" list="remedy-names" data-link-add="${r.id}" placeholder="+ remedy" autocomplete="off">
       </div>
     </div>`;
-  }).join("") : `<p class="muted">No rubrics in this chapter yet.</p>`;
+  }).join("") : emptyState("No rubrics in this chapter yet.", ICON.book);
   ensureDatalist();
 }
 function ensureDatalist() {
@@ -177,7 +185,7 @@ function renderCases() {
       + rows.map(c => `<tr><td>${esc(c.patient_initials)}</td><td>${esc(c.age)}</td><td>${esc(remedyName(c.prescribed_remedy_id))}</td><td>${esc(c.potency)}</td><td>${esc(c.outcome)}</td><td>${esc((c.date || "").slice(0, 10))}</td>
         <td class="row-actions"><button class="btn small" data-case-edit="${c.id}">Edit</button><button class="btn danger small" data-case-del="${c.id}">×</button></td></tr>`).join("")
       + `</tbody></table>`
-    : `<p class="muted">No cases${filter ? " with that outcome" : " yet"}.</p>`;
+    : emptyState(`No cases${filter ? " with that outcome" : " yet."}`, ICON.clip);
 }
 
 /* ---------------- marking ---------------- */
@@ -238,6 +246,10 @@ function renderData() {
 /* ================= events ================= */
 function bind() {
   $$(".tab").forEach(b => b.addEventListener("click", () => { S.tab = b.dataset.tab; render(); }));
+  document.addEventListener("click", (e) => {
+    const g = e.target && e.target.closest ? e.target.closest("[data-goto]") : null;
+    if (g) { S.tab = g.dataset.goto; render(); }
+  });
 
   /* theme */
   $("#theme-btn").addEventListener("click", () => {
@@ -516,5 +528,8 @@ async function boot() {
   S.tab = "dashboard";
   render();
   $("#case-date").value = stampName();
+  if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
 }
 boot();
