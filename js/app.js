@@ -5,6 +5,8 @@ import * as DB from "./db.js";
 import * as B from "./builders.js";
 import * as IMP from "./importers.js";
 import { buildXLSX, buildPDF, buildHTML, buildSQLite, buildSQL, buildCSV, zip } from "./exporters.js";
+import { APP, MAKER, LICENCE, HOWTO, FAQ } from "./docs.js";
+import { startTour } from "./tour.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -65,13 +67,20 @@ function render() {
   if (S.tab === "marking") renderMarking();
   if (S.tab === "author") renderAuthor();
   if (S.tab === "data") renderData();
+  if (S.tab === "help") renderHelp();
+  if (S.tab === "about") renderAbout();
 }
 function renderHeader() {
   $("#app-title").textContent = S.author.book_title || "Materia Medica Builder";
   $("#app-sub").textContent = S.author.name ? (S.author.name + (S.author.credentials ? ", " + S.author.credentials : "")) : "Your own materia medica & repertory — offline, private, exportable.";
   $("#author-chip").textContent = S.author.name || "Set author →";
-  $("#foot-author").textContent = S.author.copyright || (S.author.name ? "© " + (S.author.year || new Date().getFullYear()) + " " + S.author.name : "");
+  const fa = $("#foot-author"); if (fa) fa.textContent = S.author.copyright || (S.author.name ? "\u00a9 " + (S.author.year || new Date().getFullYear()) + " " + S.author.name : "");
   const ht = $("#hero-title"); if (ht) ht.textContent = S.author.book_title || "Build your own materia medica";
+  const vc = $("#version-chip"); if (vc) vc.textContent = "v" + APP.version;
+  const ft = $("#foot-title"); if (ft) ft.textContent = APP.name;
+  const fm = $("#foot-maker"); if (fm) fm.textContent = "by " + MAKER.name + (MAKER.credentials ? ", " + MAKER.credentials : "");
+  const fl = $("#foot-legal"); if (fl) fl.textContent = "\u00a9 " + LICENCE.year + " " + LICENCE.holder + " \u00b7 " + LICENCE.name + " \u2014 " + LICENCE.short;
+  const fr = $("#foot-repo"); if (fr && fr.setAttribute) fr.href = APP.repo;
 }
 
 /* ---------------- dashboard ---------------- */
@@ -243,6 +252,73 @@ function renderData() {
   $("#exp-note").textContent = notes[fmt] || "";
 }
 
+/* ---------------- help ---------------- */
+function docBlock(b) {
+  if (b.h) return `<h3>${esc(b.h)}</h3>`;
+  if (b.p) return `<p>${esc(b.p)}</p>`;
+  if (b.list) return `<ul>${b.list.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+  if (b.steps) return `<ol>${b.steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>`;
+  if (b.table) return `<div class="table-scroll"><table><thead><tr>${b.table.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>`
+    + b.table.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("") + `</tbody></table></div>`;
+  return "";
+}
+function renderHelp() {
+  const faq = FAQ.map(f => `<div class="faq"><b>${esc(f.q)}</b><p>${esc(f.a)}</p></div>`).join("");
+  $("#help-root").innerHTML = HOWTO.map(docBlock).join("") + `<h3>Questions</h3>` + faq;
+}
+
+/* ---------------- about ---------------- */
+function renderAbout() {
+  const links = [
+    `<a href="${esc(MAKER.githubUrl)}" target="_blank" rel="noopener">GitHub @${esc(MAKER.github)}</a>`,
+    `<a href="mailto:${esc(MAKER.email)}">${esc(MAKER.email)}</a>`,
+    `<a href="${esc(MAKER.website)}" target="_blank" rel="noopener">Website</a>`,
+  ].join("");
+  const chips = ["Offline-first", "Zero dependencies", "Vanilla JS", "No tracking", "PWA"].map(t => `<span>${esc(t)}</span>`).join("");
+  $("#about-root").innerHTML = `
+    <div class="card-block">
+      <div class="maker">
+        <div class="monogram">${esc(MAKER.initials)}</div>
+        <div class="maker-body">
+          <h3>${esc(MAKER.name)}</h3>
+          <div class="role">${esc(MAKER.role)}${MAKER.credentials ? " · " + esc(MAKER.credentials) : ""}</div>
+          <p class="tagline">&ldquo;${esc(MAKER.tagline)}&rdquo;</p>
+          <p>${esc(MAKER.blurb)}</p>
+          <div class="kv">${links}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      <h2>About this app</h2>
+      <p><b>${esc(APP.name)}</b> <span class="version-chip">v${esc(APP.version)}</span></p>
+      <p class="muted">${esc(APP.tagline)}</p>
+      <div class="badge-row kv">${chips}</div>
+      <div class="kv">
+        <a href="${esc(APP.repo)}" target="_blank" rel="noopener">Source code</a>
+        <a href="${esc(APP.live)}" target="_blank" rel="noopener">Live app</a>
+        <button class="linklike" id="about-tour" type="button">Take the tour</button>
+      </div>
+    </div>
+    <div class="card-block">
+      <h2>Licence</h2>
+      <div class="licence">
+        <div class="licence-head">
+          <b>${esc(LICENCE.name)}</b>
+          <span class="spacer"></span>
+          <span class="muted small">&copy; ${esc(LICENCE.year)} ${esc(LICENCE.holder)}</span>
+        </div>
+        <div class="licence-body">
+          <p>${esc(LICENCE.summary)}</p>
+          <ul>${LICENCE.clauses.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
+          <details><summary class="muted small">Full licence text</summary><pre>${esc(LICENCE.full)}</pre></details>
+        </div>
+      </div>
+    </div>`;
+  const bt = $("#about-tour"); if (bt) bt.addEventListener("click", openTour);
+}
+
+function openTour() { startTour({ onFinish: () => DB.setSetting("tourDone", true) }); }
+
 /* ================= events ================= */
 function bind() {
   $$(".tab").forEach(b => b.addEventListener("click", () => { S.tab = b.dataset.tab; render(); }));
@@ -383,6 +459,10 @@ function bind() {
   });
 
   /* data */
+  const ts = $("#tour-start"); if (ts) ts.addEventListener("click", openTour);
+  const htour = $("#hero-tour"); if (htour) htour.addEventListener("click", openTour);
+  const hp = $("#help-print"); if (hp) hp.addEventListener("click", () => { if (window.print) window.print(); });
+
   $("#exp-format").addEventListener("change", renderData);
   $("#export-btn").addEventListener("click", doExport);
   $("#import-btn").addEventListener("click", doImport);
@@ -527,6 +607,10 @@ async function boot() {
   bind();
   S.tab = "dashboard";
   render();
+  try {
+    const seen = await DB.getSetting("tourDone", false);
+    if (!seen) setTimeout(openTour, 600);
+  } catch (_) {}
   $("#case-date").value = stampName();
   if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
