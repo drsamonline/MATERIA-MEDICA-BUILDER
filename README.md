@@ -6,6 +6,9 @@
 
 [![Landing page](https://img.shields.io/badge/landing%20page-visit-4338ca)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
 [![Live demo](https://img.shields.io/badge/%E2%96%B6%20live%20demo-open-0e9384)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/)
+
+**Download:** [Windows (.exe)](https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/releases/latest/download/MATERIA-MEDICA-BUILDER-portable.exe) &nbsp;·&nbsp; [Android (.apk)](https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/releases/latest/download/MATERIA-MEDICA-BUILDER.apk)
+
 [![Install as PWA](https://img.shields.io/badge/install-PWA-5a0fc8)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/)
 
 ![Offline--first](https://img.shields.io/badge/offline--first-0e9384)
