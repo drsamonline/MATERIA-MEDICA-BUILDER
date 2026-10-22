@@ -5,6 +5,7 @@
 **Build your own materia medica and repertory — offline, private, and yours to export.**
 
 [![Landing page](https://img.shields.io/badge/landing%20page-visit-4338ca)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
+[![All projects](https://img.shields.io/badge/All%20projects-drsamonline.github.io-4338ca)](https://drsamonline.github.io/)
 [![Live demo](https://img.shields.io/badge/%E2%96%B6%20live%20demo-open-0e9384)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/play/)
 
 **Download:** [Windows (.exe)](https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/releases/latest/download/MATERIA-MEDICA-BUILDER-portable.exe) &nbsp;·&nbsp; [Android (.apk)](https://github.com/drsamonline/MATERIA-MEDICA-BUILDER/releases/latest/download/MATERIA-MEDICA-BUILDER.apk)
