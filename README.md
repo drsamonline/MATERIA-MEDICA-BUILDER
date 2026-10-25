@@ -2,6 +2,12 @@
 
 # 🌿 Materia Medica Builder
 
+<!-- shot:start -->
+
+![Screenshot](docs/shot.png)
+
+<!-- shot:end -->
+
 **Build your own materia medica and repertory — offline, private, and yours to export.**
 
 [![Landing page](https://img.shields.io/badge/landing%20page-visit-4338ca)](https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/)
