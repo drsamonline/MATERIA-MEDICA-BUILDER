@@ -333,7 +333,14 @@ html.js .reveal:not(.in){opacity:0;transform:translateY(14px)}
   }
   .theme-btn:hover{opacity:1}
   .theme-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-  .theme-btn-top{float:right;margin:2px 0 0 10px}</style>
+  .theme-btn-top{float:right;margin:2px 0 0 10px}
+/* ---- a11y: button contrast (measured, WCAG AA) ----------------------------
+   A button paired a surface token that flips with the theme with a text colour
+   that does not, so one mode rendered the label invisible. Each rule below
+   pins the pair. Ratios are from the rendered page, not from the source. */
+
+[data-theme="dark"] .btn.btn-primary{color:#12131f!important}    /* 2.98 -> 6.2 on #818cf8 */
+</style>
 <script>
 /* THEME BEFORE FIRST PAINT: a page that paints one theme and flips to the other is a
    flash, and a stored choice applied after load is a bug the reader can see. */

@@ -388,6 +388,15 @@ window.addEventListener("error", function () { window.__bootError = true; });
   input,textarea,select{border-radius:6px !important}
   .card,[class*="card"]{border-radius:10px !important}
   button:not(.ghost):not(.tab){background:var(--acc) !important}
+
+/* ---- a11y: button contrast (measured, WCAG AA) ----------------------------
+   A button paired a surface token that flips with the theme with a text colour
+   that does not, so one mode rendered the label invisible. Each rule below
+   pins the pair. Ratios are from the rendered page, not from the source. */
+
+.author-chip,.linklike{color:#ffffff!important}                  /* 1.36/1.45 -> 7.6 on #6630c2 */
+[data-theme="dark"] .author-chip,[data-theme="dark"] .linklike{color:#1a1030!important} /* 1.38 -> 5.3 */
+[data-theme="dark"] .quick .btn{color:#1a1030!important}         /* 3.41 -> 5.3 on #a171f2 */
 </style>
 </body>
 </html>
