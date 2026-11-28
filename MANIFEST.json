@@ -21,11 +21,11 @@
       "at": "2026-11-14T18:06:43Z"
     },
     ".github/workflows/build-apps.yml": {
-      "sha": "b175c2e3fe27389bc24536e18097be36006f5d88",
-      "producer": "actions-node24@2026-11-28",
+      "sha": "55e68e2cb86e09c432d6a8deaece4d3b6596ecc8",
+      "producer": "gradle-9.9.2@2026-11-28",
       "class": "canonical",
-      "at": "2026-11-28T11:08:10Z"
+      "at": "2026-11-28T11:54:53Z"
     }
   },
-  "updated": "2026-11-28T11:08:10Z"
+  "updated": "2026-11-28T11:54:53Z"
 }

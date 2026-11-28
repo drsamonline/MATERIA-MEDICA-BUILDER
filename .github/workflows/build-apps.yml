@@ -41,7 +41,7 @@ concurrency:
 
 jobs:
   app:
-    uses: drsamonline/app-builder/.github/workflows/build.yml@87a059414a86054a914f57624de8076faaf71714   # was @main
+    uses: drsamonline/app-builder/.github/workflows/build.yml@a1dfa124cbc55390598295a0c8be54dae33696c0   # was @main
     with:
       app_name: MATERIA-MEDICA-BUILDER
       app_src: docs/play
