@@ -1,7 +1,7 @@
 # Build + release + deploy. One push, one pipeline, all from the same commit.
 #
 # SPDX-FileCopyrightText: 2026 Dr Sohil Momin
-# SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+# SPDX-License-Identifier: LicenseRef-PolyForm-Perimeter-1.0.1
 #
 # That identifier covers this caller file, which is part of this repository and
 # ships under its LICENSE. The workflow it calls below is third-party code from

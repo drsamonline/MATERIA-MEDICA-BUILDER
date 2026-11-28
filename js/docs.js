@@ -5,11 +5,11 @@
 
 export const APP = {
   name: "Materia Medica Builder",
-  version: "1.1.0",
+  version: "1.2.0",
   tagline: "Your own materia medica & repertory — offline, private, exportable.",
   repo: "https://github.com/drsamonline/MATERIA-MEDICA-BUILDER",
   live: "https://drsamonline.github.io/MATERIA-MEDICA-BUILDER/",
-  licenceName: "PolyForm Noncommercial 1.0.0",
+  licenceName: "PolyForm Perimeter 1.0.1",
 };
 
 export const MAKER = {
@@ -38,151 +38,92 @@ export const DEDICATION = {
 };
 
 export const LICENCE = {
-  name: "PolyForm Noncommercial 1.0.0",
+  name: "PolyForm Perimeter 1.0.1",
   year: 2026,
   holder: "Dr Sohil Momin",
-  summary: "Free for any noncommercial purpose \u2014 personal study, teaching, research, charities and public institutions. Commercial use is not permitted.",
-  short: "Noncommercial use only.",
+  summary: "Free for any purpose, including paid practice and commercial work \u2014 the only restriction is that you may not ship a competing product built from it.",
+  short: "Free to use, including in your practice.",
   clauses: [
-    "You may use, copy, modify and share this software for any noncommercial purpose, including personal study, teaching, research, and use by charities, schools, public health bodies and government institutions.",
+    "You may use, copy, modify and share this software for any purpose \u2014 personal study, teaching, research, a paid practice or clinic, and use inside any organisation.",
     "Anyone who receives a copy from you must also get these terms, or the link to them, together with the Required Notice line naming the author.",
-    "You may not sublicense or transfer your licences to anyone else, and commercial use is not permitted.",
+    "You may not sublicense or transfer your licences to anyone else, and you may not provide to others any product that competes with this software \u2014 including using it to market a substitute for it.",
     "The software is provided \u201cas is\u201d, without warranty or condition. The author is not liable for any damages arising out of these terms or the use of the software.",
   ],
   full:
 `Required Notice: Copyright 2026 Dr Sohil Momin
 
-# PolyForm Noncommercial License 1.0.0
+# PolyForm Perimeter License 1.0.1
 
-<https://polyformproject.org/licenses/noncommercial/1.0.0>
+<https://polyformproject.org/licenses/perimeter/1.0.1>
 
 ## Acceptance
 
-In order to get any license under these terms, you must agree
-to them as both strict obligations and conditions to all
-your licenses.
+In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.
 
 ## Copyright License
 
-The licensor grants you a copyright license for the
-software to do everything you might do with the software
-that would otherwise infringe the licensor's copyright
-in it for any permitted purpose. However, you may
-only distribute the software according to [Distribution
-License](#distribution-license) and make changes or new works
-based on the software according to [Changes and New Works
-License](#changes-and-new-works-license).
+The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose.  However, you may only distribute the software according to [Distribution License](#distribution-license) and make changes or new works based on the software according to [Changes and New Works License](#changes-and-new-works-license).
 
 ## Distribution License
 
-The licensor grants you an additional copyright license
-to distribute copies of the software. Your license
-to distribute covers distributing the software with
-changes and new works permitted by [Changes and New Works
-License](#changes-and-new-works-license).
+The licensor grants you an additional copyright license to distribute copies of the software.  Your license to distribute covers distributing the software with changes and new works permitted by [Changes and New Works License](#changes-and-new-works-license).
 
 ## Notices
 
-You must ensure that anyone who gets a copy of any part of
-the software from you also gets a copy of these terms or the
-URL for them above, as well as copies of any plain-text lines
-beginning with \`Required Notice:\` that the licensor provided
-with the software. For example:
+You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with \`Required Notice:\` that the licensor provided with the software.  For example:
 
 > Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
 
 ## Changes and New Works License
 
-The licensor grants you an additional copyright license to
-make changes and new works based on the software for any
-permitted purpose.
+The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.
 
 ## Patent License
 
-The licensor grants you a patent license for the software that
-covers patent claims the licensor can license, or becomes able
-to license, that you would infringe by using the software.
+The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.
 
-## Noncommercial Purposes
+## Noncompete
 
-Any noncommercial purpose is a permitted purpose.
+Any purpose is a permitted purpose, except for providing to others any product that competes with the software.
 
-## Personal Uses
+## Competition
 
-Personal use for research, experiment, and testing for
-the benefit of public knowledge, personal study, private
-entertainment, hobby projects, amateur pursuits, or religious
-observance, without any anticipated commercial application,
-is use for a permitted purpose.
-
-## Noncommercial Organizations
-
-Use by any charitable organization, educational institution,
-public research organization, public safety or health
-organization, environmental protection organization,
-or government institution is use for a permitted purpose
-regardless of the source of funding or obligations resulting
-from the funding.
+If you use this software to market a product as a substitute for the functionality or value of the software, it competes with the software. A product may compete regardless how it is designed or deployed. For example, a product may compete even if it provides its functionality via any kind of interface (including services, libraries or plug-ins), even if it is ported to a different platform or programming language, and even if it is provided free of charge.
 
 ## Fair Use
 
-You may have "fair use" rights for the software under the
-law. These terms do not limit them.
+You may have "fair use" rights for the software under the law. These terms do not limit them.
 
 ## No Other Rights
 
-These terms do not allow you to sublicense or transfer any of
-your licenses to anyone else, or prevent the licensor from
-granting licenses to anyone else. These terms do not imply
-any other licenses.
+These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else.  These terms do not imply any other licenses.
 
 ## Patent Defense
 
-If you make any written claim that the software infringes or
-contributes to infringement of any patent, your patent license
-for the software granted under these terms ends immediately. If
-your company makes such a claim, your patent license ends
-immediately for work on behalf of your company.
+If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.
 
 ## Violations
 
-The first time you are notified in writing that you have
-violated any of these terms, or done anything with the software
-not covered by your licenses, your licenses can nonetheless
-continue if you come into full compliance with these terms,
-and take practical steps to correct past violations, within
-32 days of receiving notice. Otherwise, all your licenses
-end immediately.
+The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice.  Otherwise, all your licenses end immediately.
 
 ## No Liability
 
-***As far as the law allows, the software comes as is, without
-any warranty or condition, and the licensor will not be liable
-to you for any damages arising out of these terms or the use
-or nature of the software, under any kind of legal claim.***
+***As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.***
 
 ## Definitions
 
-The **licensor** is the individual or entity offering these
-terms, and the **software** is the software the licensor makes
-available under these terms.
+The **licensor** is the individual or entity offering these terms, and the **software** is the software the licensor makes available under these terms.
 
-**You** refers to the individual or entity agreeing to these
-terms.
+A **product** can be a good or service, or a combination of them.
 
-**Your company** is any legal entity, sole proprietorship,
-or other kind of organization that you work for, plus all
-organizations that have control over, are under the control of,
-or are under common control with that organization. **Control**
-means ownership of substantially all the assets of an entity,
-or the power to direct its management and policies by vote,
-contract, or otherwise. Control can be direct or indirect.
+**You** refers to the individual or entity agreeing to these terms.
 
-**Your licenses** are all the licenses granted to you for the
-software under these terms.
+**Your company** is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.  **Control** means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise.  Control can be direct or indirect.
 
-**Use** means anything you do with the software requiring one
-of your licenses.`,
+**Your licenses** are all the licenses granted to you for the software under these terms.
+
+**Use** means anything you do with the software requiring one of your licenses.
+`,
 };
 
 /* The in-app "how to use" guide. Each block: {h} heading, {p} paragraph,
@@ -270,5 +211,5 @@ export const FAQ = [
   { q: "Can I use my own grading scale?", a: "Yes. Marking → New scheme. Define any levels you like and mark them active." },
   { q: "Will my repertory open in the reader app?", a: "Yes — the OMM JSON export uses the same schema your reader app reads." },
   { q: "How do I move everything to a new device?", a: "Data → export JSON (full backup), then Data → import it on the new device." },
-  { q: "Is it free?", a: "Yes — free for any noncommercial purpose, including personal study and teaching. Commercial use is not permitted. See the licence below." },
+  { q: "Is it free?", a: "Yes — free for any purpose, including use in a paid practice or clinic. The one restriction is competition: you may not ship a competing product built from it. See the licence below." },
 ];

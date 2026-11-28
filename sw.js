@@ -1,5 +1,5 @@
 /* sw.js — offline cache for Materia Medica Builder. Bump CACHE to ship changes. */
-const CACHE = "mmb-v5";
+const CACHE = "mmb-v6";
 const ASSETS = [
   "./", "index.html", "manifest.json",
   "css/styles.css",

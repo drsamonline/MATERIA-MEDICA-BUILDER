@@ -23,7 +23,7 @@
 ![Vanilla JS](https://img.shields.io/badge/vanilla-JS-f7df1e)
 ![No tracking](https://img.shields.io/badge/tracking-none-blue)
 ![Formats](https://img.shields.io/badge/export-JSON%20CSV%20XLSX%20PDF%20HTML%20SQL%20SQLite-important)
-![Licence](https://img.shields.io/badge/licence-PolyForm%20Noncommercial%201.0.0-important)
+![Licence](https://img.shields.io/badge/licence-PolyForm%20Perimeter%201.0.1-important)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER)
 ![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER)
@@ -214,7 +214,7 @@ docs/screenshots/     the screenshots used above
 sw.js                 offline service worker
 manifest.json         PWA manifest
 icons/                app icons
-LICENSE               PolyForm Noncommercial 1.0.0
+LICENSE               PolyForm Perimeter 1.0.1
 ```
 
 ---
@@ -235,12 +235,12 @@ The same details appear in the app's **About** tab, together with the dedication
 
 ## 📄 Licence
 
-**PolyForm Noncommercial 1.0.0** — © 2026 Dr Sohil Momin.
+**PolyForm Perimeter 1.0.1** — © 2026 Dr Sohil Momin.
 
-**Free for any noncommercial purpose.** You may use, copy, modify and share the software for personal study, research, teaching, hobby projects, and in charities, educational institutions, public research and health organizations, and government institutions — regardless of how they are funded. In return:
+**Free for any purpose, including commercial use.** You may use, copy, modify and share the software for personal study, research, teaching, a paid practice or clinic, and inside any organisation. In return:
 
 1. anyone who receives a copy from you must also get these terms (or the link to them) and the `Required Notice: Copyright 2026 Dr Sohil Momin` line, and
-2. you may not sublicense or transfer your licences, and commercial use is not permitted.
+2. you may not sublicense or transfer your licences, and you may not provide to others a product that competes with this software — including using it to market a substitute for it.
 
 The software is provided “as is”, without warranty of any kind. Your own data — remedies, symptoms, rubrics, cases and any book you compile — belongs to you. The full text is in [LICENSE](LICENSE) and in the app's **About** tab.
 
