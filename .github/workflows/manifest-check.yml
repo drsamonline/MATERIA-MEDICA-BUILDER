@@ -1,0 +1,27 @@
+# Provenance gate. tools/manifest.py compares three blob shas per recorded path —
+# manifest, HEAD and worktree — and this job fails the build when they disagree, so
+# a bot's pin bump or a hand edit cannot sit unrecorded for days.
+#
+# --all audits every recorded path. Protected classes (hand/agent) are reported but
+# do not fail the sweep: an audit asks what drifted, not whether a generator may
+# overwrite a file it never owned. Drift still outranks protected, so a protected
+# path can never mask a drifted one.
+name: Provenance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Manifest gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check every recorded path
+        run: python3 tools/manifest.py check --all

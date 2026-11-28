@@ -19,6 +19,12 @@ check exit codes (JSON lines on stdout, one object per path):
     3  unrecorded, deleted, uncommitted, committed-drift  (refuse; human decision)
     4  protected, locked (refuse; by class)
     any other -> hard error (callers must fail closed)
+
+Drift outranks protected, so one `agent` path in an argument list cannot mask a
+drifted generated path. `check --all` audits every path recorded in the manifest:
+protected classes are printed but do not fail the sweep, because a sweep asks what
+has drifted, not whether a generator may overwrite a file it never owned. A locked
+repository still exits 4 in that mode.
 """
 from __future__ import annotations
 
@@ -139,18 +145,32 @@ def check_one(d: dict, path: str) -> dict:
     return {**base, "status": "clean", "class": cls}
 
 
-def cmd_check(paths: list[str]) -> int:
+def cmd_check(paths: list[str], check_all: bool = False) -> int:
     d = load()
-    rc = RC_CLEAN
+    if check_all:
+        paths = sorted(d["files"])
+        if not paths:
+            print("manifest records no files — nothing to audit", file=sys.stderr)
+            return RC_CLEAN
+    drift = protected = False
     for path in paths:
         r = check_one(d, path)
         print(json.dumps(r, ensure_ascii=False))
-        if r["status"] in {"locked", "protected"}:
-            rc = max(rc, RC_PROTECTED)
-        elif r["status"] in {"unrecorded", "deleted", "uncommitted", "committed-drift"}:
-            rc = max(rc, RC_DRIFT)
-        # clean / new -> 0
-    return rc
+        if r["status"] in {"unrecorded", "deleted", "uncommitted", "committed-drift"}:
+            drift = True
+        elif r["status"] == "locked":
+            protected = True          # a locked repo fails even a sweep
+        elif r["status"] == "protected" and not check_all:
+            protected = True          # expected in an audit, a refusal in a targeted check
+        # clean / new -> no effect
+    # Drift outranks protected. Otherwise one `agent` path in the argument list
+    # returns 4 and hides a drifted generated file — which is exactly how a bot's
+    # pin bump sat unnoticed until someone happened to check that path alone.
+    if drift:
+        return RC_DRIFT
+    if protected:
+        return RC_PROTECTED
+    return RC_CLEAN
 
 
 def cmd_record(paths: list[str], producer: str, cls: str | None, force: bool) -> int:
@@ -242,7 +262,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="per-file provenance for a Forge-managed repository")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("check", help="classify one or more paths")
-    p.add_argument("paths", nargs="+")
+    p.add_argument("paths", nargs="*")
+    p.add_argument("--all", dest="check_all", action="store_true",
+                   help="audit every path recorded in the manifest; protected classes "
+                        "are reported but do not fail the sweep")
     p = sub.add_parser("record", help="record the current blob sha after a write")
     p.add_argument("paths", nargs="+")
     p.add_argument("--producer", required=True)
@@ -259,7 +282,10 @@ def main(argv=None) -> int:
     sub.add_parser("status", help="summarise the manifest")
     sub.add_parser("version", help="print the schema this tool understands")
     a = ap.parse_args(argv)
-    if a.cmd == "check":   return cmd_check(a.paths)
+    if a.cmd == "check":
+        if not a.paths and not a.check_all:
+            ap.error("check needs at least one path, or --all")
+        return cmd_check(a.paths, a.check_all)
     if a.cmd == "record":  return cmd_record(a.paths, a.producer, a.cls, a.force)
     if a.cmd == "claim":   return cmd_claim(a.path, a.cls)
     if a.cmd == "lock":    return cmd_lock(a.reason)
