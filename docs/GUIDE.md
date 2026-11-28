@@ -1,6 +1,6 @@
 # MATERIA MEDICA BUILDER — user guide
 
-**Version 1.0.0 · PolyForm Noncommercial 1.0.0**
+**Version 1.1.0 · PolyForm Noncommercial 1.0.0**
 
 Build your own materia medica and repertory, then export it as a book. Everything is stored
 in your browser (IndexedDB); nothing is uploaded anywhere.
@@ -68,4 +68,8 @@ offline after the first load.
 
 ## Licence
 
-PolyForm Noncommercial 1.0.0 — free for any noncommercial use. See [LICENSE](../LICENSE).
+**PolyForm Noncommercial 1.0.0** — © 2026 Dr Sohil Momin. Free for any noncommercial
+purpose: personal study, teaching, research, and use by charities, schools, public health bodies
+and government institutions. Commercial use, sublicensing and resale are not permitted. The
+licence ships with a Required Notice line, which must travel with any copy you pass on. The full
+text is in [LICENSE](../LICENSE) and in the app's **About** tab.

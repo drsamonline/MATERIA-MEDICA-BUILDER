@@ -23,7 +23,7 @@
 ![Vanilla JS](https://img.shields.io/badge/vanilla-JS-f7df1e)
 ![No tracking](https://img.shields.io/badge/tracking-none-blue)
 ![Formats](https://img.shields.io/badge/export-JSON%20CSV%20XLSX%20PDF%20HTML%20SQL%20SQLite-important)
-![Licence](https://img.shields.io/badge/licence-free%20with%20attribution-0e9384)
+![Licence](https://img.shields.io/badge/licence-PolyForm%20Noncommercial%201.0.0-important)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/drsamonline/MATERIA-MEDICA-BUILDER)
 ![GitHub repo size](https://img.shields.io/github/repo-size/drsamonline/MATERIA-MEDICA-BUILDER)
@@ -214,7 +214,7 @@ docs/screenshots/     the screenshots used above
 sw.js                 offline service worker
 manifest.json         PWA manifest
 icons/                app icons
-LICENSE               Free Use Licence (attribution required)
+LICENSE               PolyForm Noncommercial 1.0.0
 ```
 
 ---
@@ -235,12 +235,12 @@ The same details appear in the app's **About** tab, together with the dedication
 
 ## 📄 Licence
 
-**Free Use Licence (Attribution Required)** — © 2026 Dr Sohil Momin.
+**PolyForm Noncommercial 1.0.0** — © 2026 Dr Sohil Momin.
 
-**Free to use and distribute with author mention.** You may use, copy, modify, merge, publish, distribute, sublicense and/or sell copies of this software, provided that:
+**Free for any noncommercial purpose.** You may use, copy, modify and share the software for personal study, research, teaching, hobby projects, and in charities, educational institutions, public research and health organizations, and government institutions — regardless of how they are funded. In return:
 
-1. the copyright notice and licence are included in all copies or substantial portions, and
-2. any use, distribution or derivative work clearly credits the author — **Dr Sohil Momin**, with a link to <https://github.com/drsamonline> — in its interface, documentation or about screen.
+1. anyone who receives a copy from you must also get these terms (or the link to them) and the `Required Notice: Copyright 2026 Dr Sohil Momin` line, and
+2. you may not sublicense or transfer your licences, and commercial use is not permitted.
 
 The software is provided “as is”, without warranty of any kind. Your own data — remedies, symptoms, rubrics, cases and any book you compile — belongs to you. The full text is in [LICENSE](LICENSE) and in the app's **About** tab.
 
